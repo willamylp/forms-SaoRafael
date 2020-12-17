@@ -52,56 +52,65 @@ function noCPF() {
     if (checkCPF.checked == true) {
         divCPF.classList.remove("validate-input");
         iconInputCPF.classList.remove("col-indigo");
+        divCPF.classList.add("not-allowed");
         inputCPF.classList.add("not-allowed");
-        inputCPF.required = false;
+        iconInputCPF.classList.add("not-allowed");
+        // inputCPF.required = false;
         inputCPF.disabled = true;
+        inputCPF.value = '';
 
         divCNS.classList.add("validate-input");
         iconInputCNS.classList.add("col-indigo");
-        inputCNS.required = true;
+
+
         return true;
     }
     else {
         divCPF.classList.add("validate-input");
         iconInputCPF.classList.add("col-indigo");
-        inputCPF.required = true;
+        // inputCPF.required = true;
         inputCPF.disabled = false;
 
         divCNS.classList.remove("validate-input");
         iconInputCNS.classList.remove("col-indigo");
-        inputCNS.required = false;
 
         return false;
     }
-
 }
-// $(function () {
-//     var checkCPF = $('#semCPF');
 
-//     var inputCPF = $('#cpf');
-//     var divCPF = $('#divCPF');
-//     var iconInputCPF = $("#iconInputCPF")
-    
-//     var divCNS = $('#divCNS');
-//     var inputCNS = $('#cns');
-//     var iconInputCNS = $("#iconInputCNS")
+function getDataAtual() {
+    hoje = new Date;
+    var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
+    var dataInicio = $('#dataInicio');
+    dataInicio.value = dataAtual;
 
-//     for (var i = 0; i < checkCPF.length;i++){ 
-//         if (checkCPF[i].checked == true) {
-//             divCPF.even().removeClass("validate-input");
-//             iconInputCPF.even().removeClass("col-indigo");
+    console.log(dataAtual);
+}
+$(function () {
+    hoje = new Date;
+    var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
+    var dataInicio = $('#dataInicio');
+    dataInicio.value = dataAtual;
+});
 
-//             divCNS.las().addClass("validate-input");
-//             iconInputCNS.last().addClass("col-indigo");
-//         }
-//     }
+// CALCULA DATA TÉRMINO
+$(function () {
+    var dataInicio = $('#dataInicio');
+    dataInicio.on('focusout', function () {
+        dataInicio = new Date(document.getElementById('dataInicio').value);
+        var dataTermino = document.getElementById("dataTermino");
 
-//     // if (checkCPF.checked) {
-//     //     divCPF.even().removeClass("validate-input");
-//     //     iconInputCPF.even().removeClass("col-indigo");
+        var novaData = new Date(dataInicio.setDate(dataInicio.getDate() + 14));
+        dataTermino.value = novaData.getDate() + "/" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear();
+    });
+});
 
-//     //     divCNS.las().addClass("validate-input");
-//     //     iconInputCNS.last().addClass("col-indigo");
-//     // }
-//     // else {}
+// jQuery(document).ready(function () {
+//     hoje = new Date;
+//     var dataAtual = hoje.getFullYear()+ "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
+//     var dataInicio = $('#dataInicio');
+//     dataInicio.innerHTML = dataAtual;
+
+//     console.log(dataAtual);
 // });
+
