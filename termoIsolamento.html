@@ -117,41 +117,44 @@
                             <!-- FORM -->
                             
                             <form class="contact100-form validate-form">
-                                <div class="wrap-input100 validate-input">
-                                    <input id="name" class="input100" type="text" name="name" placeholder="Full name" required>
-                                    <span class="focus-input100"></span>
-                                    <label class="label-input100" for="name">
-                                        <span class="lnr lnr-user m-b-2"></span>
-                                    </label>
+                                <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+                                    <div class="wrap-input100 validate-input col-md-6">
+                                        <input id="name" class="input100" type="text" name="name" placeholder="Nome completo" required>
+                                        <span class="focus-input100"></span>
+                                        <label class="label-input100" for="name">
+                                            <i class="material-icons col-indigo">account_circle</i>
+                                            <!-- <span class="lnr lnr-user m-b-2"></span> -->
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- ======== -->
+                                    <div id="divCPF" name="divCPF" class="wrap-input100 validate-input col-md-3 m-l-5">
+                                        <input id="cpf" class="input100" type="text" name="cpf" placeholder="CPF" required>
+                                        <span class="focus-input100"></span>
+                                        <label class="label-input100" for="cpf">
+                                            <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
+                                        </label>
+                                    </div>
+                                    <div class="alidate-input col-md-2 m-t-15">
+                                        <input type="checkbox" id="semCPF" name="semCPF" class="filled-in chk-col-indigo" onclick="noCPF();" />
+                                        <label for="semCPF"><strong>SEM CPF?</strong></label>
+                                    </div>
+                                    <!-- ======== -->
+                                    
+                                    <div id="divCNS" class="wrap-input100 col-md-4">
+                                        <input id="cns" class="input100" type="text" name="cns" placeholder="Cartão do SUS">
+                                        <span class="focus-input100"></span>
+                                        <label class="label-input100" for="cns">
+                                            <i id="iconInputCNS" class="material-icons">card_membership</i>
+                                        </label>
+                                    </div>
                                 </div>
-                            
-                                <div class="wrap-input100 validate-input">
-                                    <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
-                                    <span class="focus-input100"></span>
-                                    <label class="label-input100" for="email">
-                                        <span class="lnr lnr-envelope m-b-5"></span>
-                                    </label>
-                                </div>
-                            
-                                <div class="wrap-input100 validate-input">
-                                    <input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000">
-                                    <span class="focus-input100"></span>
-                                    <label class="label-input100" for="phone">
-                                        <span class="lnr lnr-smartphone m-b-2"></span>
-                                    </label>
-                                </div>
-                            
-                                <div class="wrap-input100 validate-input">
-                                    <textarea id="message" class="input100" name="message" placeholder="Your comments..."></textarea>
-                                    <span class="focus-input100"></span>
-                                    <label class="label-input100 rs1" for="message">
-                                        <span class="lnr lnr-bubble"></span>
-                                    </label>
-                                </div>
+                                <!-- ======== -->
+
                                 <!-- ============================================================== -->
                                 <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
-                                    <div class="container-contact100-form-btn col-md-3">
-                                        <button type="submit" class="btn btn-block btn-lg bg-indigo waves-effect">
+                                    <div class="container-contact100-form-btn col-md-5" align="center" style="margin-left: -12px;">
+                                        <button type="submit" class="btn btn-block btn-lg bg-indigo waves-effect" onclick="validate()">
                                             <i class="material-icons">print</i>
                                             <span>GERAR PÁGINA DE IMPRESSÃO</span>
                                         </button>
@@ -214,6 +217,7 @@
 
     <!-- Jquery Core Js -->
     <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/jquery/jquery.mask.min.js"></script>
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>
@@ -236,7 +240,7 @@
     <!--===============================================================================================-->
     <script src="vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/bootstrap/js/popper.js"></script>
+    <!-- <script src="vendor/bootstrap/js/popper.js"></script> -->
     <!-- <script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
     <!--===============================================================================================-->
     <script src="vendor/select2/select2.min.js"></script>
@@ -247,6 +251,7 @@
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+    
     <!-- Global site tag (gtag.js) - Google Analytics -->
     
 </body>

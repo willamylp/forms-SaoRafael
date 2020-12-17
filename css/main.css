@@ -513,7 +513,7 @@ textarea.input100 {
   position: absolute;
   height: 100%;
   top: 0px;
-  right: -25px;
+  right: 15px;
 }
 
 .rs1-alert-validate.alert-validate::before {
@@ -536,7 +536,7 @@ textarea.input100 {
   position: absolute;
   height: 100%;
   top: 0px;
-  right: -25px;
+  right: 15px;
 }
 
 /*---------------------------------------------*/
@@ -568,4 +568,8 @@ textarea.input100 {
 
 .btn-hide-contact100:hover {
   opacity: 1;
+}
+
+.not-allowed {
+     cursor: not-allowed !important;
 }

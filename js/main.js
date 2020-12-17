@@ -1,7 +1,13 @@
-
-(function ($) {
+function validate() {
     "use strict";
+    var verificaCampoCPF = noCPF();
 
+    if (verificaCampoCPF == true) {
+        document.getElementById('divCPF').classList.remove("validate-input");
+    } else {
+        document.getElementById('divCPF').classList.add("validate-input");
+    }
+    
     /*==================================================================
     [ Validate after type ]*/
     $('.validate-input .input100').each(function(){
@@ -29,7 +35,7 @@
                 check=false;
             }
         }
-
+        console.log(check);
         return check;
     });
 
@@ -84,5 +90,5 @@
         $('.container-contact100').fadeIn(300);
     });
 
-})(jQuery);
+}
 
