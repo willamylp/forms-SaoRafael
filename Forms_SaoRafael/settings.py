@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +77,7 @@ WSGI_APPLICATION = 'Forms_SaoRafael.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-# if('forms-saorafael.cw6wqpqsktku.sa-east-1.rds.amazonaws.com' in os.environ):
+# if 'forms-saorafael.cw6wqpqsktku.sa-east-1.rds.amazonaws.com' in os.environ:
 #     DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.mysql',
