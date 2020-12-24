@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'widget_tweaks',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +77,19 @@ WSGI_APPLICATION = 'Forms_SaoRafael.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
+# if('forms-saorafael.cw6wqpqsktku.sa-east-1.rds.amazonaws.com' in os.environ):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': os.environ['forms-saorafael'],
+#             'USER': os.environ['root'],
+#             'PASSWORD': os.environ['DOGLDHER32'],
+#             'HOST': os.environ['forms-saorafael.cw6wqpqsktku.sa-east-1.rds.amazonaws.com'],
+#             'PORT': os.environ['3306'],
+#         }
+#     }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -103,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -115,6 +132,18 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    'estaticos',
+]
+
+# LOGIN
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/loadApp/'
+LOGOUT_REDIRECT_URL = '/'
+
+# Ajustes na sessão
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
