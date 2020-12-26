@@ -15,7 +15,7 @@ def RegistroTermo(request):
         form.save()
         messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
         return redirect('../ListarTermos')
-    return render(request, 'registroTermo/RegistrarTermo.html', {'form': form})
+    return render(request, 'registroTermo/content.html', {'form': form})
 
 
 @login_required
@@ -30,7 +30,7 @@ def AtualizarTermo(request):
     if(form.is_valid()):
         form.save()
         return redirect('../../ListarTermos')
-    return render(request, 'registroTermo/RegistrarTermo.html', {'form': form})
+    return render(request, 'registroTermo/content.html', {'form': form})
     
 @login_required
 def DeletarTermo(request, id):

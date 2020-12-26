@@ -62,7 +62,6 @@ function noCPF() {
         divCNS.classList.add("validate-input");
         iconInputCNS.classList.add("col-indigo");
 
-
         return true;
     }
     else {
