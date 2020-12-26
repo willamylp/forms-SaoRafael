@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'multiselectfield',
 
     'Home',
+    'TermoIsolamento',
 ]
 
 MIDDLEWARE = [
