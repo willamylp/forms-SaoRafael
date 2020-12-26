@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="body">
+            <div class="button-demo">
+                <style>
+                    button:hover {
+                        font-weight: bold;
+                    }
+                </style>
+                <a href="{% url 'RegistrarTermo' %}"
+                    <button type="button" class="btn btn-lg bg-indigo waves-effect" style="width: 100%">
+                        <i class="material-icons font-20">assignment</i>
+                        <span class="font-20">REGISTRAR</span>
+                    </button>
+                </a>
+                {% comment %} ----- {% endcomment %}
+                <a href="{% url 'ListarTermos' %}">
+                    <button type="button" class="btn btn-lg bg-blue waves-effect" style="width: 100%">
+                        <i class="material-icons font-20">list</i>
+                        <span class="font-20">LISTAR TERMOS</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

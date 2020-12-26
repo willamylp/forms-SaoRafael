@@ -20,15 +20,16 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from Forms_SaoRafael.views import loadApp, logoutApp
 from Home import urls as home_urls
+from TermoIsolamento import urls as termo_urls
 
 urlpatterns = [
     path('', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path("loadApp/", loadApp),
     path("logoutApp/", logoutApp),
-    path('admin/', admin.site.urls),
 
     path('home/', include(home_urls)),
-
-
+    path('termo/', include(termo_urls)),
+    
+    path('admin/', admin.site.urls),
 ]

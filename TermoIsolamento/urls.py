@@ -2,7 +2,6 @@ from django.urls import path
 from .views import RegistroTermo, ListarTermos, AtualizarTermo, DeletarTermo
 #from Home.urls import urlpatterns
 
-
 urlpatterns = [
     path("RegistrarTermo/", RegistroTermo, name="RegistroTermo"),
     path("ListarTermos/", ListarTermos, name="ListarTermos"),

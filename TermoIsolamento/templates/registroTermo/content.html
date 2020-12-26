@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+ {% include 'head.html' %}
+
+<body class="theme-blue">
+    
+    {% include '../page_loader.html' %}
+
+    <div class="overlay"></div>
+
+    {% include '../top_bar.html' %}
+
+    <section class="content">
+		
+	    {% include 'breadcrumb.html' %}
+
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+
+                            <!-- FORM -->
+                            
+                            {% include 'form.html' %}
+
+                            <!-- END FORM -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        {% include '../footer.html' %}
+    </section>
+    
+    <!-- #Modal -->
+    {% include '../modal_info_sistema.html' %}
+    <!-- FIM DO MODAL -->
+
+    {% include 'scripts.html' %}
+    
+</body>
+</html>
