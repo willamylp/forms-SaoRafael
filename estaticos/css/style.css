@@ -8360,3 +8360,69 @@ a.linkModal:hover {
     margin: 100px 1% 0 10%;
   }
 }
+
+/*==========> MEUS ESTILOS <==========*/
+
+/* TABLES */
+table.dataTable thead > tr > th, table.dataTable thead > tr > td {
+  padding-right: 0;
+}
+thead, tfoot {
+  text-align: center;
+}
+
+/**/
+.info-box .icon {
+  min-width: 70px;
+}
+/**/
+strong.btnTitles {
+  font-size: 12pt;
+}
+.navbar-header {
+  color: #fff;
+}
+.header2 {  
+  margin-left: 8%;
+}
+
+span.marcadorRequired {
+  font-size: 14pt;
+  color: #ff0000;
+}
+
+.copyright a {
+  text-decoration: none;
+}
+
+.corpoDeConteudos {
+  margin-bottom: -30px;
+}
+
+/* MODAL */
+a.linkModal {
+  color: #FF9800;
+  text-decoration: none;
+  font-weight: 900;
+  transition: 0.2s;
+}
+a.linkModal:hover {
+  color: #E08600;
+  transition: 0.2s;
+}
+
+/**/
+.infoBox:hover {
+  background-color: #008080;
+}
+
+a.linkTextBold {
+   color: #fff;
+}
+a.linkTextBold:active {
+  color: #fff;
+}
+a.linkTextBold:hover {
+  color: #fff;
+  font-weight: bold;
+}

@@ -1,12 +1,12 @@
 function loading(opcao) {
     if (opcao == 'login') {
         setTimeout(function () {
-            window.location.href = "../principal";
-        }, 2500);
+            window.location.href = "../home";
+        }, 60000);
     }
     else {
         setTimeout(function () {
             window.location.href = "../logout";
-        }, 2500);
+        }, 1500);
     }
 }
