@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import home
-from SMHosts.views import logoutApp
+from Forms_SaoRafael.views import logoutApp
 
 urlpatterns = [
     path('', home, name="home"),

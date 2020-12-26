@@ -2,7 +2,7 @@ function loading(opcao) {
     if (opcao == 'login') {
         setTimeout(function () {
             window.location.href = "../home";
-        }, 60000);
+        }, 1500);
     }
     else {
         setTimeout(function () {

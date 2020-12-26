@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
 
 from Forms_SaoRafael.views import loadApp, logoutApp
-
+from Home import urls as home_urls
 
 urlpatterns = [
     path('', LoginView.as_view(), name="login"),
@@ -27,5 +27,8 @@ urlpatterns = [
     path("loadApp/", loadApp),
     path("logoutApp/", logoutApp),
     path('admin/', admin.site.urls),
+
+    path('home/', include(home_urls)),
+
 
 ]

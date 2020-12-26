@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+
+{% include "./head.html" %}
+
+<body class="theme-blue">
+
+    {% include "./page_loader.html"%}
+
+    <div class="overlay"></div>
+
+    {% include "./top_bar.html"%}
+
+    <section class="content">
+		<div class="body">
+	        <ol class="breadcrumb"><h5>Você está em:</h5>
+	            <li  class="active">
+	                <i class="material-icons">home</i> Início
+	            </li>
+	        </ol>
+	    </div>
+	    
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        {% include "./content.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="legal" align="center">
+            <div class="copyright">
+                <h5>
+                    <a href="#" data-toggle="modal" class="col-indigo" data-target="#modalSystemInfo">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <span>Informações do Sistema</span>
+                    </a>
+                    <br><br>
+                </h5>
+            </div>
+        </div>
+    </section>
+    
+    <!-- #Modal -->
+    {% include "./modal_info_sistema.html" %}
+    <!-- FIM DO MODAL -->
+
+    {% include "./scripts.html" %}
+</body>
+</html>
