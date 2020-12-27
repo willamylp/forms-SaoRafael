@@ -93,16 +93,33 @@ $(function () {
     dataInicio.value = dataAtual;
 });
 
+function DiffDates(dateIni, dateFim) {
+    // Subtrai uma data pela outra
+    const diff = Math.abs(dateIni.getTime() - dateFim.getTime()); 
+
+    // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); 
+
+    // Mostra a diferença em dias
+    return days;
+}
+
 // CALCULA DATA TÉRMINO
 $(function () {
     var dataInicio = $('#dataInicio');
-    var dataSintomas = $('#dataSintomas')
+    var dataSintomas = $('#dataSintomas');
     dataInicio.on('focusout', function () {
         dataInicio = new Date(document.getElementById('dataInicio').value);
         var dataTermino = document.getElementById("dataTermino");
+        dataSintomas = new Date(document.getElementById('dataSintomas').value);
 
-        var novaData = new Date(dataInicio.setDate(dataInicio.getDate() + 14));
+        var diffDatas = DiffDates(dataInicio, dataSintomas);
+
+        var novaData = new Date(dataInicio.setDate(dataInicio.getDate() + (14 - diffDatas)));
         dataTermino.value = novaData.getDate() + "/" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear();
+
+         document.getElementById('infoDataIsolamento').innerHTML = 
+            'Paciente com <strong class="col-indigo">' + diffDatas + '</strong> de Sintomas. 14 - '+ diffDatas + ' = <strong class="col-indigo">' + (14 - diffDatas) + '</strong> dias de Isolamento';
     });
 });
 
