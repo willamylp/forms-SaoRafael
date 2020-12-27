@@ -96,6 +96,7 @@ $(function () {
 // CALCULA DATA TÉRMINO
 $(function () {
     var dataInicio = $('#dataInicio');
+    var dataSintomas = $('#dataSintomas')
     dataInicio.on('focusout', function () {
         dataInicio = new Date(document.getElementById('dataInicio').value);
         var dataTermino = document.getElementById("dataTermino");
