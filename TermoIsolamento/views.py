@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import IsolamentoForm
-from .models import TermoIsolamento
+from .forms import PacienteForm
+from .models import Paciente
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
@@ -10,7 +10,7 @@ from Home.urls import home
 
 @login_required
 def RegistroTermo(request):
-    form = IsolamentoForm(request.POST or None)
+    form = PacienteForm(request.POST or None)
     if(form.is_valid()):
         form.save()
         messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
@@ -20,13 +20,13 @@ def RegistroTermo(request):
 
 @login_required
 def ListarTermos(request):
-    termos = TermoIsolamento.objects.all().values()
-    return render(request, 'listagemTermos/ListarTermos.html', {'termos': termos})
+    pacientes = Paciente.objects.all().values()
+    return render(request, 'listagemTermos/ListarTermos.html', {'pacientes': pacientes})
 
 @login_required
 def AtualizarTermo(request):
-    termo = get_object_or_404(TermoIsolamento, pk=id)
-    form = IsolamentoForm(request.POST or None, instance=termo)
+    paciente = get_object_or_404(Paciente, pk=id)
+    form = PacienteForm(request.POST or None, instance=paciente)
     if(form.is_valid()):
         form.save()
         return redirect('../../ListarTermos')
@@ -34,6 +34,6 @@ def AtualizarTermo(request):
     
 @login_required
 def DeletarTermo(request, id):
-    termoDelete = get_object_or_404(TermoIsolamento, pk=id)
-    termoDelete.delete()
+    pacienteDelete = get_object_or_404(Paciente, pk=id)
+    pacienteDelete.delete()
     return redirect('../../ListarTermos')

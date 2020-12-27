@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import TermoIsolamento
+from .models import Paciente, Residente
 
-admin.site.register(TermoIsolamento)
+admin.site.register(Paciente)
+admin.site.register(Residente)
