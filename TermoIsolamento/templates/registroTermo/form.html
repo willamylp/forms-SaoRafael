@@ -1,66 +1,71 @@
+{% load widget_tweaks %}
+
 <form class="contact100-form validate-form">
+    {% csrf_token %}
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
         <div class="wrap-input100 validate-input col-md-6">
-            <input id="name" class="input100" type="text" name="name" placeholder="Nome completo" >
+            {{ form.nome_paciente|add_class:'input100'|attr:"placeholder:Nome Completo" }}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="name">
-                <i class="material-icons col-indigo">account_circle</i>
+            <label class="label-input100" for="id_nome_paciente">
+                <i class="material-icons col-indigo">person</i>
             </label>
         </div>
         
         <div id="divCPF" name="divCPF" class="wrap-input100 validate-input col-md-3 m-l-5">
-            <input id="cpf" class="input100" type="text" name="cpf" placeholder="CPF" >
+            {{ form.cpf|add_class:'input100'|attr:"placeholder:CPF"|attr:"name:id_cpf"|attr:"maxlength" }}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="cpf">
+            <label class="label-input100" for="id_cpf">
                 <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
             </label>
         </div>
         <div class="alidate-input col-md-2 m-t-15 m-l-5">
             <input type="checkbox" id="semCPF" name="semCPF" class="filled-in chk-col-indigo" onclick="noCPF();" />
-            <label for="semCPF"><strong>SEM CPF?</strong></label>
+            <label for="semCPF"><strong style="font-size: 14pt">SEM CPF?</strong></label>
         </div>
 
         <!-- ======== -->
         
         <div id="divCNS" class="wrap-input100 col-md-4">
-            <input id="cns" class="input100" type="text" name="cns" placeholder="Cartão do SUS">
+            {{ form.cns|add_class:'input100'|attr:"placeholder:Cartão do SUS"|attr:"name:id_cns" }}
+            {% comment %} <input id="cns" class="input100" type="text" name="cns" placeholder="Cartão do SUS"> {% endcomment %}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="cns">
+            <label class="label-input100" for="id_cns">
                 <i id="iconInputCNS" class="material-icons">card_membership</i>
             </label>
         </div>
 
         <div class="wrap-input100 validate-input col-md-7 m-l-5">
-            <input id="profissional" class="input100" type="text" name="profissional" placeholder="Nome do Profissional Informante" >
+            {{ form.profis_informante|add_class:'input100'|attr:"placeholder:Nome do Profissional Informante" }}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="profissional">
-                <i class="material-icons col-indigo">account_circle</i>
+            <label class="label-input100" for="id_profis_informante">
+                <i class="material-icons col-indigo">person_pin</i>
             </label>
         </div>
 
         <!-- =========== -->
-        <div class="wrap-input100 validate-input col-md-4 m-l-5">
+        <div class="wrap-input100 validate-input col-md-4">
             <em class="col-indigo">Data dos <strong>1º Sintomas</strong>:</em>
-            <input id="dataSintomas" class="input100" type="date" name="dataSintomas">
+            {{ form.dt_1_sintomas|add_class:'input100'|attr:"type:date"}}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="dataSintomas">
+            <label class="label-input100" for="id_dt_1_sintomas">
                 <i class="material-icons col-indigo m-t-20">today</i>
             </label>
         </div>
-        <div class="wrap-input100 validate-input col-md-4">
+        <div class="wrap-input100 validate-input col-md-4 m-l-5">
             <em class="col-indigo"><strong>Início do Isolamento:</strong></em>
-            <input id="dataInicio" class="input100 datepicker" type="date" name="dataInicio" value="">
+            {{ form.dt_ini_isolamento|add_class:'input100'|attr:"type:date"}}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="dataInicio">
+            <label class="label-input100" for="id_dt_ini_isolamento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
             </label>
         </div>
 
         <div class="wrap-input100 validate-input col-md-3 m-l-5 not-allowed">
             <em class="col-indigo not-allowed"><strong>Término do Isolamento</strong>:</em>
-            <input id="dataTermino" class="input100 not-allowed" type="text" name="dataTermino" placeholder="AUTOMÁTICO" disabled>
+            {{ form.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"type:text"|attr:"placeholder:AUTOMÁTICO"|attr:"disabled"}}
+            {% comment %} <input id="dataTermino" class="input100 not-allowed" type="text" name="dataTermino" placeholder="AUTOMÁTICO" disabled> {% endcomment %}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="dataTermino">
+            <label class="label-input100" for="id_dt_fim_isolamento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
             </label>
         </div>
@@ -75,7 +80,7 @@
         <div class="wrap-input100 validate-input col-md-5">
             <input id="logradouro" class="input100" type="text" name="logradouro" placeholder="Nome da Rua, Avenida, Travessa...">
             <span class="focus-input100"></span>
-            <label class="label-input100" for="logradouro">
+            <label class="label-input100" for="id_logradouro">
                 <i class="material-icons col-indigo">home</i>
             </label>
         </div>
@@ -83,7 +88,7 @@
         <div class="wrap-input100 validate-input col-md-2 m-l-5">
             <input id="numero" class="input100" type="text" name="numero" placeholder="Nº">
             <span class="focus-input100"></span>
-            <label class="label-input100" for="numero">
+            <label class="label-input100" for="id_numero">
                 <i class="material-icons col-indigo">looks_one</i>
             </label>
         </div>
@@ -91,7 +96,7 @@
         <div class="wrap-input100 validate-input col-md-4 m-l-5">
             <input id="bairro" class="input100" type="text" name="bairro" placeholder="Nome do Bairro">
             <span class="focus-input100"></span>
-            <label class="label-input100" for="bairro">
+            <label class="label-input100" for="id_bairro">
                 <i class="material-icons col-indigo">home</i>
             </label>
         </div>
@@ -115,8 +120,9 @@
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
         <div class="container-contact100-form-btn col-md-4" style="margin-left: -12px;">
             <button type="submit" class="btn btn-block btn-lg bg-indigo waves-effect" onclick="validate()">
-                <i class="material-icons">print</i>&nbsp;&nbsp;
-                <span>GERAR PÁGINA DE IMPRESSÃO</span>
+                <i class="material-icons">save</i>&nbsp;&nbsp;
+                <span>SALVAR E IMPRIMIR</span>&nbsp;&nbsp;
+                <i class="material-icons">print</i>
             </button>
         </div>
     </div>

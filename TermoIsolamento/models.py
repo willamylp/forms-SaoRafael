@@ -45,12 +45,12 @@ class Paciente(models.Model):
     )
     # ---> INFORMAÇÕES PESSOAIS <---
     nome_paciente = models.CharField(max_length=200, blank=False, null=False)
-    cpf = models.CharField(max_length=14, blank=True, null=True, unique=True)
-    cns = models.CharField(max_length=18, blank=True, null=True, unique=True)
+    cpf = models.CharField(max_length=14, blank=True)
+    cns = models.CharField(max_length=18, blank=True)
     dt_nascimento = models.DateField(blank=False)
     dt_1_sintomas = models.DateField(blank=False)
     dt_ini_isolamento = models.DateField(blank=False)
-    dt_fim_isolamento = models.DateField(blank=False)
+    dt_fim_isolamento = models.CharField(max_length=20, blank=False, null=False)
     resposavel_pct = models.CharField(max_length=20, blank=False, choices=RESPONSAVEL_PCT, default='')
     grau_parentesco = models.CharField(max_length=50, blank=True)
 

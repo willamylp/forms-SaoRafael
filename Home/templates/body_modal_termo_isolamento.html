@@ -5,20 +5,30 @@
                 <style>
                     button:hover {
                         font-weight: bold;
+                        color: white;
+                        transition: 0.2s;
                     }
                 </style>
-                <a href="../termo/RegistrarTermo"
-                    <button type="button" class="btn btn-lg bg-indigo waves-effect" style="width: 100%">
-                        <i class="material-icons font-20">assignment</i>
-                        <span class="font-20">REGISTRAR</span>
-                    </button>
+                <a href="../termo/RegistrarTermo">
+                    <div class="info-box bg-indigo hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">assignment_turned_in</i>
+                        </div>
+                        <div class="content Reg-List-Termo">
+                            <h4>REGISTRAR</h4>
+                        </div>
+                    </div>
                 </a>
                 {% comment %} ----- {% endcomment %}
                 <a href="../termo/ListarTermos">
-                    <button type="button" class="btn btn-lg bg-blue waves-effect" style="width: 100%">
-                        <i class="material-icons font-20">list</i>
-                        <span class="font-20">LISTAR TERMOS</span>
-                    </button>
+                    <div class="info-box bg-blue hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">list</i>
+                        </div>
+                        <div class="content Reg-List-Termo">
+                            <h4>LISTAR TERMOS</h4>
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>

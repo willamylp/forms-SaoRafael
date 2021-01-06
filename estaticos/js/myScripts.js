@@ -15,7 +15,7 @@
 //     });
 // })
 $(function () {
-    var input = $('#cpf');
+    var input = $('#id_cpf');
     input.on('focusin', function () {
         input.maxLength = "11";
         input.mask('000000000000000', { reverse: true });
@@ -26,7 +26,7 @@ $(function () {
     });
 });
 $(function () {
-    var input = $('#cns');
+    var input = $('#id_cns');
     input.on('focusin', function () {
         input.maxLength = "15";
         input.mask('000000000000000', { reverse: true });
@@ -42,12 +42,12 @@ function noCPF() {
     var checkCPF = document.getElementById('semCPF');
 
     var divCPF = document.getElementById('divCPF');
-    var inputCPF = document.getElementById('cpf');
-    var iconInputCPF = document.getElementById("iconInputCPF")
+    var inputCPF = document.getElementById('id_cpf');
+    var iconInputCPF = document.getElementById("iconInputCPF");
 
     var divCNS = document.getElementById('divCNS');
-    var inputCNS = document.getElementById('cns');
-    var iconInputCNS = document.getElementById("iconInputCNS")
+    var inputCNS = document.getElementById('id_cns');
+    var iconInputCNS = document.getElementById("iconInputCNS");
     
     if (checkCPF.checked == true) {
         divCPF.classList.remove("validate-input");
@@ -55,20 +55,19 @@ function noCPF() {
         divCPF.classList.add("not-allowed");
         inputCPF.classList.add("not-allowed");
         iconInputCPF.classList.add("not-allowed");
-        // inputCPF.required = false;
+        inputCPF.required = false;
         inputCPF.disabled = true;
         inputCPF.value = '';
 
         divCNS.classList.add("validate-input");
         iconInputCNS.classList.add("col-indigo");
 
-
         return true;
     }
     else {
         divCPF.classList.add("validate-input");
         iconInputCPF.classList.add("col-indigo");
-        // inputCPF.required = true;
+        inputCPF.required = true;
         inputCPF.disabled = false;
 
         divCNS.classList.remove("validate-input");
@@ -78,55 +77,37 @@ function noCPF() {
     }
 }
 
-function getDataAtual() {
-    hoje = new Date;
-    var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
-    var dataInicio = $('#dataInicio');
-    dataInicio.value = dataAtual;
-
-    console.log(dataAtual);
-}
-$(function () {
-    hoje = new Date;
-    var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
-    var dataInicio = $('#dataInicio');
-    dataInicio.value = dataAtual;
-});
+// $(function () {
+//     hoje = new Date;
+//     var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
+//     var dataInicio = $('#id_dt_ini_isolamento');
+//     dataInicio.value = dataAtual;
+// });
 
 function DiffDates(dateIni, dateFim) {
     // Subtrai uma data pela outra
-    const diff = Math.abs(dateIni.getTime() - dateFim.getTime()); 
+    const diff = Math.abs(dateIni.getTime() - dateFim.getTime());
 
     // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
-    const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); 
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
     return days;
 }
 
 // CALCULA DATA TÉRMINO
 $(function () {
-    var dataInicio = $('#dataInicio');
-    var dataSintomas = $('#dataSintomas');
+    var dataInicio = $('#id_dt_ini_isolamento');
+    var dataSintomas = $('#id_dt_1_sintomas');
     dataInicio.on('focusout', function () {
-        dataInicio = new Date(document.getElementById('dataInicio').value);
-        var dataTermino = document.getElementById("dataTermino");
-        dataSintomas = new Date(document.getElementById('dataSintomas').value);
+        dataInicio = new Date(document.getElementById('id_dt_ini_isolamento').value);
+        var dataTermino = document.getElementById("id_dt_fim_isolamento");
+        dataSintomas = new Date(document.getElementById('id_dt_1_sintomas').value);
 
         var diffDatas = DiffDates(dataInicio, dataSintomas);
 
         var novaData = new Date(dataInicio.setDate(dataInicio.getDate() + (14 - diffDatas)));
         dataTermino.value = novaData.getDate() + "/" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear();
 
-         document.getElementById('infoDataIsolamento').innerHTML = 
-            'Paciente com <strong class="col-indigo">' + diffDatas + '</strong> de Sintomas. 14 - '+ diffDatas + ' = <strong class="col-indigo">' + (14 - diffDatas) + '</strong> dias de Isolamento';
+        document.getElementById('infoDataIsolamento').innerHTML =
+            'Paciente com <strong class="col-indigo">' + diffDatas + '</strong> dias de Sintomas. 14 - ' + diffDatas + ' = <strong class="col-indigo"> +' + (14 - diffDatas) + '</strong> dias de Isolamento';
     });
 });
-
-// jQuery(document).ready(function () {
-//     hoje = new Date;
-//     var dataAtual = hoje.getFullYear()+ "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
-//     var dataInicio = $('#dataInicio');
-//     dataInicio.innerHTML = dataAtual;
-
-//     console.log(dataAtual);
-// });
-
