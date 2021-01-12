@@ -72,29 +72,33 @@
         <div class="col-md-12">
             <span id="infoDataIsolamento" class="col-red font-14"></span>
         </div>
-    </div>
-
-    <!-- =========== -->
-
-    <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
-        <div class="wrap-input100 validate-input col-md-5">
-            <input id="logradouro" class="input100" type="text" name="logradouro" placeholder="Nome da Rua, Avenida, Travessa...">
+    
+        <div class="wrap-input100 validate-input col-md-7">
+            {{ form.endereco|add_class:"input100"|attr:"placeholder:Nome da Rua, Avenida, Travessa..." }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_logradouro">
                 <i class="material-icons col-indigo">home</i>
             </label>
         </div>
 
-        <div class="wrap-input100 validate-input col-md-2 m-l-5">
-            <input id="numero" class="input100" type="text" name="numero" placeholder="Nº">
+        <div class="wrap-input100 validate-input col-md-4 m-l-5">
+            {{ form.num_endereco|add_class:"input100"|attr:"placeholder:Nº"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_numero">
                 <i class="material-icons col-indigo">looks_one</i>
             </label>
         </div>
 
-        <div class="wrap-input100 validate-input col-md-4 m-l-5">
-            <input id="bairro" class="input100" type="text" name="bairro" placeholder="Nome do Bairro">
+        <div class="wrap-input100 validate-input col-md-4">
+            {{ form.complemento|add_class:"input100"|attr:"placeholder:Complemento"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_bairro">
+                <i class="material-icons col-indigo">home</i>
+            </label>
+        </div>
+
+        <div class="wrap-input100 validate-input col-md-7 m-l-5">
+            {{ form.bairro|add_class:"input100"|attr:"placeholder:Bairro"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_bairro">
                 <i class="material-icons col-indigo">home</i>
