@@ -12,7 +12,7 @@
         </div>
         
         <div id="divCPF" name="divCPF" class="wrap-input100 validate-input col-md-3 m-l-5">
-            {{ form.cpf|add_class:'input100'|attr:"placeholder:CPF"|attr:"name:id_cpf"|attr:"maxlength" }}
+            {{ form.cpf|attr:"id:id_cpf"|add_class:'input100'|attr:"maxlength:11"|attr:"placeholder:CPF"|attr:"name:id_cpf"|attr:"maxlength" }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_cpf">
                 <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
