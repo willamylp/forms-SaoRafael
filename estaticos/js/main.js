@@ -1,12 +1,5 @@
 function validate() {
-    "use strict";
-    var verificaCampoCPF = noCPF();
-
-    if (verificaCampoCPF == true) {
-        document.getElementById('divCPF').classList.remove("validate-input");
-    } else {
-        document.getElementById('divCPF').classList.add("validate-input");
-    }
+    
     
     /*==================================================================
     [ Validate after type ]*/

@@ -14,11 +14,12 @@
 //         input.mask('(00)0 0000.0000')
 //     });
 // })
+
 $(function () {
     var input = $('#id_cpf');
     input.on('focusin', function () {
         input.maxLength = "11";
-        input.mask('000000000000000', { reverse: true });
+        input.mask('00000000000', { reverse: true });
     });
     input.on('focusout', function () {
         input.maxLength = "14";
@@ -51,10 +52,12 @@ function noCPF() {
     
     if (checkCPF.checked == true) {
         divCPF.classList.remove("validate-input");
-        iconInputCPF.classList.remove("col-indigo");
         divCPF.classList.add("not-allowed");
-        inputCPF.classList.add("not-allowed");
+
+        iconInputCPF.classList.remove("col-indigo");
         iconInputCPF.classList.add("not-allowed");
+        
+        inputCPF.classList.add("not-allowed");
         inputCPF.required = false;
         inputCPF.disabled = true;
         inputCPF.value = '';
@@ -65,8 +68,9 @@ function noCPF() {
         return true;
     }
     else {
-        divCPF.classList.add("validate-input");
+        //divCPF.classList.add("validate-input");
         iconInputCPF.classList.add("col-indigo");
+        inputCPF.classList.remove("not-allowed");
         inputCPF.required = true;
         inputCPF.disabled = false;
 
@@ -76,7 +80,82 @@ function noCPF() {
         return false;
     }
 }
+/*
+$(function () {
+    var responsavel = $('#id_responsavel_pct').val();
+    var divGrauParentesco = $('#divGrauParentesco');
+    var inputGrauParentesco = $('#id_grau_parentesco');
+    var iconGrauParentesco = $('#iconGrauParentesco');
 
+    //Se o Responsável for o prórprio paciente
+    if (responsavel == 'Paciente') {
+        inputGrauParentesco.addClass('not-allowed');
+        inputGrauParentesco.disabled = true;
+        inputGrauParentesco.required = false;
+        inputGrauParentesco.value = '';
+
+        divGrauParentesco.removeClass('validate-input');
+        divGrauParentesco.addClass('not-allowed');
+
+        iconGrauParentesco.addClass('not-allowed col-grey');
+    }
+    //Se for um parente/responsável
+    else {
+        inputGrauParentesco.removeClass('not-allowed');
+        inputGrauParentesco.disabled = false;
+        inputGrauParentesco.required = true;
+
+        divGrauParentesco.addClass('validate-input');
+        divGrauParentesco.removeClass('not-allowed');
+
+        iconGrauParentesco.removeClass('not-allowed col-grey');
+        iconGrauParentesco.addClass('col-indigo');
+    }
+});*/
+function grauParentesco() {
+    var responsavel = document.getElementById('id_responsavel_pct').value;
+    var divGrauParentesco = document.getElementById('divGrauParentesco');
+    var inputGrauParentesco = document.getElementById('id_grau_parentesco');
+    var iconGrauParentesco = document.getElementById('iconGrauParentesco');
+    var labelGrauParentesco = document.getElementById('labelGrauParentesco');
+    //Se for um parente/responsável
+    if (responsavel == 'Responsável') {
+        inputGrauParentesco.classList.remove('not-allowed');
+        inputGrauParentesco.disabled = false;
+        inputGrauParentesco.required = true;
+
+        divGrauParentesco.classList.add('validate-input');
+        divGrauParentesco.classList.remove('not-allowed');
+
+        iconGrauParentesco.classList.remove('not-allowed');
+        iconGrauParentesco.classList.remove('col-grey');
+        iconGrauParentesco.classList.add('col-indigo');
+        inputGrauParentesco.placeholder = 'Ex.: Mãe/Pai/Tio/Amigo...';
+
+        labelGrauParentesco.classList.remove('col-grey');
+        labelGrauParentesco.classList.add('col-indigo');
+    }
+
+    //Se o Responsável for o prórprio paciente
+    else {
+        inputGrauParentesco.classList.add('not-allowed');
+        inputGrauParentesco.disabled = true;
+        inputGrauParentesco.required = false;
+        inputGrauParentesco.value = '';
+        inputGrauParentesco.placeholder = 'O Próprio Paciente';
+
+        divGrauParentesco.classList.remove('validate-input');
+        divGrauParentesco.classList.add('not-allowed');
+
+        iconGrauParentesco.classList.add('not-allowed');
+        iconGrauParentesco.classList.remove('col-indigo');
+        iconGrauParentesco.classList.add('col-grey');
+
+        labelGrauParentesco.classList.add('col-grey');
+        labelGrauParentesco.classList.remove('col-indigo');
+        //iconGrauParentesco.classList.add('col-grey');
+    }
+}
 // $(function () {
 //     hoje = new Date;
 //     var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();

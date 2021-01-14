@@ -4,15 +4,15 @@
     {% csrf_token %}
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
         <div class="wrap-input100 validate-input col-md-6">
-            {{ form.nome_paciente|add_class:'input100'|attr:"placeholder:Nome Completo" }}
+            {{ form.nome_paciente|add_class:'input100'|attr:"placeholder:Nome Completo do Paciente" }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_nome_paciente">
                 <i class="material-icons col-indigo">person</i>
             </label>
         </div>
         
-        <div id="divCPF" name="divCPF" class="wrap-input100 validate-input col-md-3 m-l-5">
-            {{ form.cpf|attr:"id:id_cpf"|add_class:'input100'|attr:"maxlength:11"|attr:"placeholder:CPF"|attr:"name:id_cpf"|attr:"maxlength" }}
+        <div id="divCPF" name="divCPF" class="wrap-input100 col-md-3 m-l-5">
+            {{ form.cpf|attr:"id:id_cpf"|add_class:'input100'|attr:"placeholder:CPF"|attr:"name:id_cpf" }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_cpf">
                 <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
@@ -73,35 +73,72 @@
             <span id="infoDataIsolamento" class="col-red font-14"></span>
         </div>
     
-        <div class="wrap-input100 validate-input col-md-7">
+        <div class="wrap-input100 validate-input col-md-6">
             {{ form.endereco|add_class:"input100"|attr:"placeholder:Nome da Rua, Avenida, Travessa..." }}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="id_logradouro">
+            <label class="label-input100" for="id_endereco">
                 <i class="material-icons col-indigo">home</i>
             </label>
         </div>
 
-        <div class="wrap-input100 validate-input col-md-4 m-l-5">
+        <div class="wrap-input100 validate-input col-md-2 m-l-5">
             {{ form.num_endereco|add_class:"input100"|attr:"placeholder:Nº"}}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="id_numero">
+            <label class="label-input100" for="id_num_endereco">
                 <i class="material-icons col-indigo">looks_one</i>
             </label>
         </div>
 
-        <div class="wrap-input100 validate-input col-md-4">
+        <div class="wrap-input100 col-md-3 m-l-5">
             {{ form.complemento|add_class:"input100"|attr:"placeholder:Complemento"}}
             <span class="focus-input100"></span>
-            <label class="label-input100" for="id_bairro">
-                <i class="material-icons col-indigo">home</i>
+            <label class="label-input100" for="id_complemento">
+                <i class="material-icons">home</i>
             </label>
         </div>
 
-        <div class="wrap-input100 validate-input col-md-7 m-l-5">
+        <div class="wrap-input100 validate-input col-md-6">
             {{ form.bairro|add_class:"input100"|attr:"placeholder:Bairro"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_bairro">
-                <i class="material-icons col-indigo">home</i>
+                <i class="material-icons col-indigo">nature_people</i>
+            </label>
+        </div>
+        <div class="wrap-input100 col-md-5 m-l-5">
+            {{ form.ponto_referencia|add_class:"input100"|attr:"placeholder:Ponto de Referência"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_ponto_referencia">
+                <i class="material-icons">location_on</i>
+            </label>
+        </div>
+
+        <div class="col-md-12"></div>
+        <div class="wrap-input100 validate-input col-md-4 not-allowed">
+            <em class="col-indigo not-allowed"><strong>Data de Nascimento</strong>:</em>
+            {{ form.dt_nascimento|add_class:'input100 not-allowed'|attr:"type:date"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_dt_nascimento">
+                <i class="material-icons col-indigo m-t-20">date_range</i>
+            </label>
+        </div>
+        <div class="col-md-3">
+            <label class="col-indigo">
+                <i class="material-icons">accessibility</i>
+                <em>Resp. Pelo Paciente</em>
+            </label>
+            <select class="form-control show-tick m-t-7" id="id_responsavel_pct" onchange="grauParentesco();">
+                {% for value, text in form.responsavel_pct.field.choices %}
+                    <option value="{{ value }}">{{ text }}</option>
+                {% endfor %}
+            </select>
+            
+        </div>
+        <div id="divGrauParentesco" name="divGrauParentesco" class="wrap-input100 col-md-4 m-l-5">
+        <label class="col-grey"  id="labelGrauParentesco">Grau de Parentesco</label>
+            {{ form.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"onchange:grauParentesco();"|attr:"style:height: /50px"|attr:"disabled"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_grau_parentesco">
+                <i id="iconGrauParentesco" class="material-icons m-t-20 col-grey not-allowed">group</i>
             </label>
         </div>
     </div>

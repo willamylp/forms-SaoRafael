@@ -51,7 +51,7 @@ class Paciente(models.Model):
     dt_1_sintomas = models.DateField(blank=False)
     dt_ini_isolamento = models.DateField(blank=False)
     dt_fim_isolamento = models.CharField(max_length=20, blank=False, null=False)
-    resposavel_pct = models.CharField(max_length=20, blank=False, choices=RESPONSAVEL_PCT, default='')
+    responsavel_pct = models.CharField(max_length=20, blank=False, choices=RESPONSAVEL_PCT, default='')
     grau_parentesco = models.CharField(max_length=50, blank=True)
 
     # ---> INFORMAÇÕES CLÍNICAS <---
@@ -60,7 +60,7 @@ class Paciente(models.Model):
     exame_solicitado = models.CharField(max_length=50, blank=False, choices=EXAME_SOLICITADO, default='')
     outros_sintomas = models.CharField(max_length=200, blank=True)
     hora_coleta = models.TimeField(auto_now=False, auto_now_add=False, blank=True)
-    # ---> ENDEREÇO <---
+    # ---> ENDEREÇO OK <---
     endereco = models.CharField(max_length=100, blank=False)
     num_endereco = models.CharField(max_length=10, blank=False)
     complemento = models.CharField(max_length=100, blank=True)
