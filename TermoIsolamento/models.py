@@ -43,7 +43,7 @@ class Paciente(models.Model):
     data_registro = models.DateField(
         auto_now=False, auto_now_add=True
     )
-    # ---> INFORMAÇÕES PESSOAIS <---
+    # ---> INFORMAÇÕES PESSOAIS OK <---
     nome_paciente = models.CharField(max_length=200, blank=False, null=False)
     cpf = models.CharField(max_length=14, blank=True)
     cns = models.CharField(max_length=18, blank=True)
@@ -60,6 +60,7 @@ class Paciente(models.Model):
     exame_solicitado = models.CharField(max_length=50, blank=False, choices=EXAME_SOLICITADO, default='')
     outros_sintomas = models.CharField(max_length=200, blank=True)
     hora_coleta = models.TimeField(auto_now=False, auto_now_add=False, blank=True)
+
     # ---> ENDEREÇO OK <---
     endereco = models.CharField(max_length=100, blank=False)
     num_endereco = models.CharField(max_length=10, blank=False)
@@ -67,11 +68,11 @@ class Paciente(models.Model):
     bairro = models.CharField(max_length=100, blank=False)
     ponto_referencia = models.CharField(max_length=100, blank=True)
 
-    # ---> CONTATO <---
+    # ---> CONTATO OK <---
     telefone = models.CharField(max_length=20, blank=False)
     telefone2 = models.CharField(max_length=20, blank=True)
 
-    # ---> PROFISSIONAIS <---
+    # ---> PROFISSIONAIS OK <---
     nome_acs = models.CharField(max_length=100, blank=True)
     profis_informante = models.CharField(max_length=100, blank=False)
 

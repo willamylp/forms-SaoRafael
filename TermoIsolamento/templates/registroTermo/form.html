@@ -112,7 +112,6 @@
             </label>
         </div>
 
-        <div class="col-md-12"></div>
         <div class="wrap-input100 validate-input col-md-4 not-allowed">
             <em class="col-indigo not-allowed"><strong>Data de Nascimento</strong>:</em>
             {{ form.dt_nascimento|add_class:'input100 not-allowed'|attr:"type:date"}}
@@ -130,18 +129,41 @@
                 {% for value, text in form.responsavel_pct.field.choices %}
                     <option value="{{ value }}">{{ text }}</option>
                 {% endfor %}
-            </select>
-            
+            </select>            
         </div>
+
         <div id="divGrauParentesco" name="divGrauParentesco" class="wrap-input100 col-md-4 m-l-5">
         <label class="col-grey"  id="labelGrauParentesco">Grau de Parentesco</label>
-            {{ form.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"onchange:grauParentesco();"|attr:"style:height: /50px"|attr:"disabled"}}
+            {{ form.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"onchange:grauParentesco();"|attr:"style:height: 50px"|attr:"disabled"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_grau_parentesco">
                 <i id="iconGrauParentesco" class="material-icons m-t-20 col-grey not-allowed">group</i>
             </label>
         </div>
+
+        <div class="wrap-input100 validate-input col-md-3">
+            {{ form.telefone|add_class:"input100"|attr:"placeholder:Nº Telefone"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_telefone">
+                <i class="material-icons col-indigo">phone_forwarded</i>
+            </label>
+        </div>
+        <div class="wrap-input100 col-md-3 m-l-5">
+            {{ form.telefone2|add_class:"input100"|attr:"placeholder:Nº Secundário"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_telefone2">
+                <i class="material-icons">phone</i>
+            </label>
+        </div>
+        <div class="wrap-input100 col-md-5 m-l-5">
+            {{ form.nome_acs|add_class:"input100"|attr:"placeholder:Nome do ACS"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_nome_acs">
+                <i class="material-icons">person_pin</i>
+            </label>
+        </div>
     </div>
+
 
     <!-- =========== -->
     

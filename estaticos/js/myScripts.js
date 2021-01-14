@@ -14,7 +14,39 @@
 //         input.mask('(00)0 0000.0000')
 //     });
 // })
-
+$(function () {
+    var input = $('#id_telefone');
+    input.on('focusin', function () {
+        input.maxLength = "11";
+        input.mask('00000000000', { reverse: true });
+    });
+    input.on('focusout', function () {
+        input.maxLength = "14";
+        input.mask('(00)00000-0000', { reverse: true });
+    });
+});
+$(function () {
+    var input = $('#id_telefone2');
+    input.on('focusin', function () {
+        input.maxLength = "11";
+        input.mask('00000000000', { reverse: true });
+    });
+    input.on('focusout', function () {
+        input.maxLength = "14";
+        input.mask('(00)00000-0000', { reverse: true });
+    });
+});
+$(function () {
+    var input = $('#id_cpf');
+    input.on('focusin', function () {
+        input.maxLength = "11";
+        input.mask('00000000000', { reverse: true });
+    });
+    input.on('focusout', function () {
+        input.maxLength = "14";
+        input.mask('000.000.000-00', { reverse: true });
+    });
+});
 $(function () {
     var input = $('#id_cpf');
     input.on('focusin', function () {
