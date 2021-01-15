@@ -11,12 +11,12 @@ from Home.urls import home
 @login_required
 def RegistroTermo(request):
     form = PacienteForm(request.POST or None)
+    #formResidente = Residente(request.POST or None)
     if(form.is_valid()):
         form.save()
         messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
         return redirect('../ListarTermos')
     return render(request, 'registroTermo/content.html', {'form': form})
-
 
 @login_required
 def ListarTermos(request):
@@ -26,8 +26,8 @@ def ListarTermos(request):
 @login_required
 def AtualizarTermo(request):
     paciente = get_object_or_404(Paciente, pk=id)
-    listaSintomas - list(Paciente.sintomas)
-    listaCondicoes - list(Paciente.condicoes)
+    listaSintomas = list(Paciente.sintomas)
+    listaCondicoes = list(Paciente.condicoes)
     form = PacienteForm(request.POST or None, instance=paciente)
     if(form.is_valid()):
         form.save()
@@ -40,7 +40,7 @@ def AtualizarTermo(request):
             'listCondicoes': listaCondicoes
         }
     )
-    return render(request, 'registroTermo/content.html', {'form': form})
+    #return render(request, 'registroTermo/content.html', {'form': form})
     
 @login_required
 def DeletarTermo(request, id):

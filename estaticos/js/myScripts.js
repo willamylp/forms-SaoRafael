@@ -1,19 +1,3 @@
-
-
-// $(document).ready(function () {
-//     $("#id_CEP").mask("00000-000");
-// });
-// $(function () {
-//     var input = $('#id_telefone');
-//     input.on('focusin', function () {
-//         input.maxLength = "11";
-//         input.mask('00000000000')
-//     });
-//     input.on('focusout', function () {
-//         input.maxLength = "15";
-//         input.mask('(00)0 0000.0000')
-//     });
-// })
 $(function () {
     var input = $('#id_telefone');
     input.on('focusin', function () {
@@ -70,6 +54,54 @@ $(function () {
     });
 });
 
+function addRowPessoa(table, numPessoas) {
+    var row = table.insertRow(2);
+    if (numPessoas != 0) {
+        for (i = 0; i < numPessoas; i++) {
+            row.insertCell(0).innerHTML = "<strong> Membro" + i + "</strong>";
+            row.insertCell(1).innerHTML =
+                '<div class="form-group" style="margin-bottom: 0px;">\n' +
+                '<div class="form-line">\n' +
+                '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo"' + ' id="nome_residente_' + i + '" required /> \n' +
+                '</div>\n' +
+                '</div>';
+            row.insertCell(2).innerHTML =
+                '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
+                '<i class="material-icons"> delete</i>\n' +
+                '</button >';
+        }
+    }
+}
+$(function () {
+    var numPessoas = $('#numPessoas').val();
+    var table = $('#tabelaPessoas');
+
+    addRowPessoa(tablem, numPessoas);
+});
+
+function addNovaPessoa() {
+    var table = document.getElementById('tabelaPessoas');
+    var row = table.insertRow(2);
+
+    row.insertCell(0).innerHTML = "<strong>99<strong>";
+    row.insertCell(1).innerHTML = 
+        '<div class="form-group" style="margin-bottom: 0px;">\n' +
+        '<div class="form-line">\n' +
+        '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required /> \n' +
+        '</div>\n' +
+        '</div>';
+    row.insertCell(2).innerHTML = 
+        '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
+        '<i class="material-icons"> delete</i>\n' +
+        '</button >';
+}
+function deleteCell(btndel) {
+    if (typeof (btndel) == "object") {
+        $(btndel).closest("tr").remove();
+    } else {
+        return false;
+    }
+}
 
 function noCPF() {
     var checkCPF = document.getElementById('semCPF');
@@ -251,12 +283,6 @@ function outrosSintomas() {
         iconOutrosSintomas.classList.add('not-allowed');
     }
 }
-// $(function () {
-//     hoje = new Date;
-//     var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();
-//     var dataInicio = $('#id_dt_ini_isolamento');
-//     dataInicio.value = dataAtual;
-// });
 
 function DiffDates(dateIni, dateFim) {
     // Subtrai uma data pela outra

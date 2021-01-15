@@ -8431,3 +8431,6 @@ a.linkTextBold:hover {
   padding: 10px;
   margin: 15px 0;
 }
+.bg-col-t {
+  background-color: transparent;
+}
