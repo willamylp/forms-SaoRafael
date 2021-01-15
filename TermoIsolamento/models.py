@@ -54,7 +54,7 @@ class Paciente(models.Model):
     responsavel_pct = models.CharField(max_length=20, blank=False, choices=RESPONSAVEL_PCT, default='')
     grau_parentesco = models.CharField(max_length=50, blank=True)
 
-    # ---> INFORMAÇÕES CLÍNICAS <---
+    # ---> INFORMAÇÕES CLÍNICAS OK <---
     sintomas = MultiSelectField(blank=False, choices=SINTOMAS)
     condicoes = MultiSelectField(blank=True, choices=CONDICOES)
     outros_sintomas = models.CharField(max_length=200, blank=True)
@@ -78,7 +78,6 @@ class Paciente(models.Model):
 
     def __str__(self):
         return self.nome_paciente
-
 
 class Residente(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
