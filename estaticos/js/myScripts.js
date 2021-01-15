@@ -188,6 +188,69 @@ function grauParentesco() {
         //iconGrauParentesco.classList.add('col-grey');
     }
 }
+
+function assintomatico() {
+    var inputAssintomatico = document.getElementById('id_sintomas_0');
+    var outrosInputs = [
+        document.getElementById('id_sintomas_1'),
+        document.getElementById('id_sintomas_2'),
+        document.getElementById('id_sintomas_3'),
+        document.getElementById('id_sintomas_4'),
+        document.getElementById('id_sintomas_5'),
+        document.getElementById('id_sintomas_6'),
+        document.getElementById('id_sintomas_7'),
+        document.getElementById('id_sintomas_8'),
+        document.getElementById('id_sintomas_9'),
+        document.getElementById('id_sintomas_10'),
+        document.getElementById('id_sintomas_11'),
+        document.getElementById('id_sintomas_12'),
+        document.getElementById('id_sintomas_13'),
+    ];
+    if (inputAssintomatico.checked == true) {
+        for(i = 0; i < outrosInputs.length; i++ ) {
+            outrosInputs[i].disabled = true;
+        }
+    }
+    else {
+        for (i = 0; i < outrosInputs.length; i++) {
+            outrosInputs[i].disabled = false;
+        } 
+    }
+
+}
+
+function outrosSintomas() {
+    var outrosSintomas = document.getElementById('id_sintomas_13');
+    var divOutrosSintomas = document.getElementById('divOutrosSintomas');
+    var inputOutrosSintomas = document.getElementById('id_outros_sintomas');
+    var iconOutrosSintomas = document.getElementById('iconOutrosSintomas');
+    var labelOutrosSintomas = document.getElementById('labelOutrosSintomas');
+
+    if(outrosSintomas.checked == true) {
+        divOutrosSintomas.classList.add('validate-input');
+
+        inputOutrosSintomas.required = true;
+        inputOutrosSintomas.disabled = false;
+        inputOutrosSintomas.classList.remove('not-allowed');
+
+        iconOutrosSintomas.classList.remove('not-allowed');
+        iconOutrosSintomas.classList.remove('col-grey');
+        iconOutrosSintomas.classList.add('col-red'); 
+    }
+
+    else {
+        divOutrosSintomas.classList.remove('validate-input');
+
+        inputOutrosSintomas.classList.add('not-allowed');
+        inputOutrosSintomas.required = false;
+        inputOutrosSintomas.disabled = true;    
+        inputOutrosSintomas.value = '';
+
+        iconOutrosSintomas.classList.remove('col-red');
+        iconOutrosSintomas.classList.add('col-grey');
+        iconOutrosSintomas.classList.add('not-allowed');
+    }
+}
 // $(function () {
 //     hoje = new Date;
 //     var dataAtual = hoje.getFullYear() + "-" + (hoje.getMonth() + 1) + "-" + hoje.getDate();

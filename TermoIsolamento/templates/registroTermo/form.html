@@ -134,7 +134,7 @@
 
         <div id="divGrauParentesco" name="divGrauParentesco" class="wrap-input100 col-md-4 m-l-5">
         <label class="col-grey"  id="labelGrauParentesco">Grau de Parentesco</label>
-            {{ form.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"onchange:grauParentesco();"|attr:"style:height: 50px"|attr:"disabled"}}
+            {{ form.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"style:height: 50px"|attr:"disabled"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_grau_parentesco">
                 <i id="iconGrauParentesco" class="material-icons m-t-20 col-grey not-allowed">group</i>
@@ -162,6 +162,107 @@
                 <i class="material-icons">person_pin</i>
             </label>
         </div>
+
+        <div class="col-md-12"></div>
+        
+        <div class="wrap-input100 col-md-5">
+            <br>
+            <label class="col-indigo font-bold font-italic">SINTOMAS</label>
+            <div class="demo-radio-button">
+                <br>
+                {% if "AtualizarTermo" in request.path %}
+                    {% for value, text in form.sintomas.field.choices %}
+                    <input type="checkbox"
+                        id="id_sintomas_{{ forloop.counter0 }}"
+                        name="sintomas_{{ forloop.counter0 }}"
+                        {% if value == 'Assintomático' %} class="filled-in chk-col-indigo" 
+                        {% else %} class="filled-in chk-col-red" 
+                        {% endif %}
+                        value="{{ value }}"
+                        {% if value == 'Outros' %} onclick='outrosSintomas();' {% endif %}
+                        {% if value in listSintomas %} checked {% endif %}
+                    />
+                    <label for="id_sintomas_{{ forloop.counter0 }}">{{ text }}</label>
+                    <br>
+                    {% endfor %}
+                {% else %}
+                    {% for value, text in form.sintomas.field.choices %}
+                        <input type="checkbox"
+                            id="id_sintomas_{{ forloop.counter0 }}"
+                            name="sintomas_{{ forloop.counter0 }}"
+                            {% if value == 'Assintomático' %} class="filled-in chk-col-indigo" onclick='assintomatico();'
+                            {% else %} class="filled-in chk-col-red" 
+                            {% endif %}
+                            value="{{ value }}"
+                            {% if value == 'Outros' %} onclick='outrosSintomas();' {% endif %}
+                            {% if value in form.sintomas %} checked {% endif %}
+                        />
+                        <label for="id_sintomas_{{ forloop.counter0 }}">{{ text }}</label>
+                        <br>
+                        {% endfor %}
+                {% endif %}
+            </div>
+            <div id="divOutrosSintomas" name="divOutrosSintomas" class="wrap-input100 col-md-12">
+        {% comment %} <label class="col-grey"  id="labelOustrosSintomas">Grau de Parentesco</label> {% endcomment %}
+            {{ form.outros_sintomas|attr:"id:id_outros_sintomas"|attr:"name:id_outros_sintomas"|add_class:"input100 not-allowed"|attr:"placeholder:Outros Sintomas"|attr:"style:padding: 0 0px 0 25px"|attr:"disabled"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_outros_sintomas" style="left: 0; width: 40px">
+                <i id="iconOutrosSintomas" class="material-icons col-grey not-allowed">add_circle</i>
+            </label>
+        </div>
+        </div>
+        <div class="wrap-input100 col-md-6 m-l-10">
+            <br>
+            <label class="col-indigo font-bold font-italic">CONDIÇÕES</label>
+            <div class="demo-radio-button">
+                <br>
+                {% if "AtualizarTermo" in request.path %}
+                    {% for value, text in form.condicoes.field.choices %}
+                    <input type="checkbox"
+                        id="id_condicoes_{{ forloop.counter0 }}"
+                        name="condicoes_{{ forloop.counter0 }}"
+                        class="filled-in chk-col-red"
+                        value="{{ value }}"
+                        {% if value in listCondicoes %} checked {% endif %}
+                    />
+                    <label for="id_condicoes_{{ forloop.counter0 }}">{{ text }}</label>
+                    <br>
+                    {% endfor %}
+                {% else %}
+                    {% for value, text in form.condicoes.field.choices %}
+                        <input type="checkbox"
+                            id="id_condicoes_{{ forloop.counter0 }}"
+                            name="condicoes_{{ forloop.counter0 }}"
+                            class="filled-in chk-col-red"
+                            value="{{ value }}"
+                            {% if value in form.condicoes %} checked {% endif %}
+                        />
+                        <label for="id_condicoes_{{ forloop.counter0 }}">{{ text }}</label>
+                        <br>
+                        {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        
+        {% comment %} <div class="wrap-input100 col-md-3 m-l-10">
+        <label class="col-grey m-t-5">Hora da Coleta</label>
+            {{ form.hora_coleta|add_class:"input100"|attr:"placeholder:HH:MM"}}
+            <span class="focus-input100"></span>
+            <label class="label-input100" for="id_hora_coleta">
+                <i class="material-icons m-t-20">access_time</i>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label class="col-indigo">
+                <i class="material-icons">medical_services</i>
+                <em>Exame Solicitado</em>
+            </label>
+            <select class="form-control show-tick m-t-17" id="id_exame_solicitado">
+                {% for value, text in form.exame_solicitado.field.choices %}
+                    <option value="{{ value }}">{{ text }}</option>
+                {% endfor %}
+            </select>            
+        </div> {% endcomment %}
     </div>
 
 

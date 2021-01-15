@@ -26,10 +26,20 @@ def ListarTermos(request):
 @login_required
 def AtualizarTermo(request):
     paciente = get_object_or_404(Paciente, pk=id)
+    listaSintomas - list(Paciente.sintomas)
+    listaCondicoes - list(Paciente.condicoes)
     form = PacienteForm(request.POST or None, instance=paciente)
     if(form.is_valid()):
         form.save()
         return redirect('../../ListarTermos')
+    return render(
+        request,
+        'listagemTermos/ListarTermos.html', {
+            'paciente': paciente,
+            'listSintomas': listaSintomas,
+            'listCondicoes': listaCondicoes
+        }
+    )
     return render(request, 'registroTermo/content.html', {'form': form})
     
 @login_required
