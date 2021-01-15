@@ -57,9 +57,9 @@ class Paciente(models.Model):
     # ---> INFORMAÇÕES CLÍNICAS <---
     sintomas = MultiSelectField(blank=False, choices=SINTOMAS)
     condicoes = MultiSelectField(blank=True, choices=CONDICOES)
-    exame_solicitado = models.CharField(max_length=50, blank=False, choices=EXAME_SOLICITADO, default='')
     outros_sintomas = models.CharField(max_length=200, blank=True)
-    hora_coleta = models.TimeField(auto_now=False, auto_now_add=False, blank=True)
+    #hora_coleta = models.TimeField(auto_now=False, auto_now_add=False, blank=True)
+    #exame_solicitado = models.CharField(max_length=50, blank=False, choices=EXAME_SOLICITADO, default='')
 
     # ---> ENDEREÇO OK <---
     endereco = models.CharField(max_length=100, blank=False)
