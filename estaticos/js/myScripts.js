@@ -54,46 +54,55 @@ $(function () {
     });
 });
 
-function addRowPessoa(table, numPessoas) {
-    var row = table.insertRow(2);
-    if (numPessoas != 0) {
-        for (i = 0; i < numPessoas; i++) {
-            row.insertCell(0).innerHTML = "<strong> Membro" + i + "</strong>";
-            row.insertCell(1).innerHTML =
-                '<div class="form-group" style="margin-bottom: 0px;">\n' +
-                '<div class="form-line">\n' +
-                '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo"' + ' id="nome_residente_' + i + '" required /> \n' +
-                '</div>\n' +
-                '</div>';
-            row.insertCell(2).innerHTML =
-                '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
-                '<i class="material-icons"> delete</i>\n' +
-                '</button >';
+$(function () {
+    var numPessoas = $('#numPessoas');
+    numPessoas.on('focusout', function () {
+        numPessoas = parseInt(numPessoas.val());
+        if (numPessoas > 0) {
+            for (i = 1; i <= numPessoas; i++) {
+                addNovaPessoa((numPessoas - i) + 1);
+            }
         }
+    });
+});
+function addRowPessoa(numPessoas) {
+    var table = document.getElementById("tabelaPessoas");
+    var row = table.insertRow(2);
+    
+    for (i = 0; i < numPessoas; i++) {
+        row.insertCell(0).innerHTML = "<strong> Membro" + i + "</strong>";
+        row.insertCell(1).innerHTML =
+            '<div class="form-group" style="margin-bottom: 0px;">\n' +
+                '<div class="form-line">\n' +
+                    '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
+                '</div>\n' +
+            '</div>\n';
+        row.insertCell(2).innerHTML =
+            '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
+               '<i class="material-icons"> delete</i>\n' +
+            '</button>\n';
     }
 }
-$(function () {
-    var numPessoas = $('#numPessoas').val();
-    var table = $('#tabelaPessoas');
 
-    addRowPessoa(tablem, numPessoas);
-});
-
-function addNovaPessoa() {
+function addNovaPessoa(i) {
     var table = document.getElementById('tabelaPessoas');
     var row = table.insertRow(2);
+    var i = i;
 
-    row.insertCell(0).innerHTML = "<strong>99<strong>";
+    row.insertCell(0).innerHTML = "<strong>Membro "+ i +"<strong>";
     row.insertCell(1).innerHTML = 
         '<div class="form-group" style="margin-bottom: 0px;">\n' +
         '<div class="form-line">\n' +
-        '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required /> \n' +
+        '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
         '</div>\n' +
         '</div>';
     row.insertCell(2).innerHTML = 
         '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
         '<i class="material-icons"> delete</i>\n' +
         '</button >';
+}
+function name(params) {
+    
 }
 function deleteCell(btndel) {
     if (typeof (btndel) == "object") {
