@@ -32,17 +32,6 @@ $(function () {
     });
 });
 $(function () {
-    var input = $('#id_cpf');
-    input.on('focusin', function () {
-        input.maxLength = "11";
-        input.mask('00000000000', { reverse: true });
-    });
-    input.on('focusout', function () {
-        input.maxLength = "14";
-        input.mask('000.000.000-00', { reverse: true });
-    });
-});
-$(function () {
     var input = $('#id_cns');
     input.on('focusin', function () {
         input.maxLength = "15";
@@ -54,19 +43,48 @@ $(function () {
     });
 });
 
+
+
 $(function () {
     var numPessoas = $('#numPessoas');
     numPessoas.on('focusout', function () {
+        numPessoas = $('#numPessoas');
         numPessoas = parseInt(numPessoas.val());
+        if (numPessoas < (parseInt(localStorage.getItem('numPessoas'))) ){
+            deleteAllRows( parseInt(localStorage.getItem('numPessoas')) );
+        }
+        else {
+            deleteAllRows(0);
+        }
         if (numPessoas > 0) {
             for (i = 1; i <= numPessoas; i++) {
                 addNovaPessoa((numPessoas - i) + 1);
             }
         }
+        localStorage.setItem(
+            "numPessoas", $('#numPessoas').val()
+        );
     });
 });
-function addRowPessoa(numPessoas) {
-    var table = document.getElementById("tabelaPessoas");
+
+function deleteAllRows(numPessoas) {
+    if (numPessoas == 0) {
+        numPessoas = parseInt(document.getElementById('numPessoas').value);
+    }
+    else if (numPessoas == 'x') {
+        numPessoas = parseInt(document.getElementById('numPessoas').value);
+        localStorage.removeItem('numPessoas');
+        document.getElementById('numPessoas').value = 0;
+    }
+    for (i = 1; i <= numPessoas; i++) {
+        let id = '#nome_residente_' + i;
+        $(id).closest("tr").remove();
+    }
+}
+
+/*function addRowPessoa() {
+    //var numPessoas = parseInt(document.getElementById('numPessoas').value)
+    var table = document.getElementById('tabelaPessoas');
     var row = table.insertRow(2);
     
     for (i = 0; i < numPessoas; i++) {
@@ -82,7 +100,7 @@ function addRowPessoa(numPessoas) {
                '<i class="material-icons"> delete</i>\n' +
             '</button>\n';
     }
-}
+} */
 
 function addNovaPessoa(i) {
     var table = document.getElementById('tabelaPessoas');
@@ -100,16 +118,21 @@ function addNovaPessoa(i) {
         '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
         '<i class="material-icons"> delete</i>\n' +
         '</button >';
-}
-function name(params) {
     
 }
+
 function deleteCell(btndel) {
     if (typeof (btndel) == "object") {
         $(btndel).closest("tr").remove();
     } else {
         return false;
     }
+    localStorage.setItem(
+        'numPessoas', (localStorage.getItem('numPessoas') - 1)
+    );
+    document.getElementById('numPessoas').value = (
+        (document.getElementById('numPessoas').value) - 1
+    );
 }
 
 function noCPF() {
@@ -153,38 +176,7 @@ function noCPF() {
         return false;
     }
 }
-/*
-$(function () {
-    var responsavel = $('#id_responsavel_pct').val();
-    var divGrauParentesco = $('#divGrauParentesco');
-    var inputGrauParentesco = $('#id_grau_parentesco');
-    var iconGrauParentesco = $('#iconGrauParentesco');
 
-    //Se o Responsável for o prórprio paciente
-    if (responsavel == 'Paciente') {
-        inputGrauParentesco.addClass('not-allowed');
-        inputGrauParentesco.disabled = true;
-        inputGrauParentesco.required = false;
-        inputGrauParentesco.value = '';
-
-        divGrauParentesco.removeClass('validate-input');
-        divGrauParentesco.addClass('not-allowed');
-
-        iconGrauParentesco.addClass('not-allowed col-grey');
-    }
-    //Se for um parente/responsável
-    else {
-        inputGrauParentesco.removeClass('not-allowed');
-        inputGrauParentesco.disabled = false;
-        inputGrauParentesco.required = true;
-
-        divGrauParentesco.addClass('validate-input');
-        divGrauParentesco.removeClass('not-allowed');
-
-        iconGrauParentesco.removeClass('not-allowed col-grey');
-        iconGrauParentesco.addClass('col-indigo');
-    }
-});*/
 function grauParentesco() {
     var responsavel = document.getElementById('id_responsavel_pct').value;
     var divGrauParentesco = document.getElementById('divGrauParentesco');
@@ -250,14 +242,15 @@ function assintomatico() {
     if (inputAssintomatico.checked == true) {
         for(i = 0; i < outrosInputs.length; i++ ) {
             outrosInputs[i].disabled = true;
+            outrosInputs[i].checked = false;
         }
+        outrosSintomas();
     }
     else {
         for (i = 0; i < outrosInputs.length; i++) {
             outrosInputs[i].disabled = false;
         } 
     }
-
 }
 
 function outrosSintomas() {
