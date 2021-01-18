@@ -130,11 +130,17 @@ function deleteCell(btndel) {
     localStorage.setItem(
         'numPessoas', (localStorage.getItem('numPessoas') - 1)
     );
-    document.getElementById('numPessoas').value = (
-        (document.getElementById('numPessoas').value) - 1
-    );
-}
+    
+    var numPessoas = document.getElementById('numPessoas');
+    numPessoas.value = (parseInt(numPessoas.value)) - 1;
 
+    //corrigeIDsNumPessoas(numPessoas.value);
+}
+function corrigeIDsNumPessoas(numPessoas) {
+    if(numPessoas != '0') {
+        
+    }
+}
 function noCPF() {
     var checkCPF = document.getElementById('semCPF');
 
@@ -299,17 +305,34 @@ function DiffDates(dateIni, dateFim) {
 $(function () {
     var dataInicio = $('#id_dt_ini_isolamento');
     var dataSintomas = $('#id_dt_1_sintomas');
+
     dataInicio.on('focusout', function () {
-        dataInicio = new Date(document.getElementById('id_dt_ini_isolamento').value);
-        var dataTermino = document.getElementById("id_dt_fim_isolamento");
-        dataSintomas = new Date(document.getElementById('id_dt_1_sintomas').value);
+        var dataIni = new Date(dataInicio.val());
+        var data1Sintomas = new Date(dataSintomas.val());
+        var dataTermino = document.getElementById('id_dt_fim_isolamento');
+        
+        var diffDatas = DiffDates(dataIni, data1Sintomas);
 
-        var diffDatas = DiffDates(dataInicio, dataSintomas);
+        if (dataIni < data1Sintomas) {
+            let oldDataInicio = document.getElementById('id_dt_ini_isolamento').value;
+            
+            document.getElementById('id_dt_ini_isolamento').value = document.getElementById('id_dt_1_sintomas').value;
+            document.getElementById('id_dt_1_sintomas').value = oldDataInicio;
 
-        var novaData = new Date(dataInicio.setDate(dataInicio.getDate() + (14 - diffDatas)));
+            var dataIni = new Date(dataInicio.val());
+        }
+
+        var novaData = new Date(dataIni.setDate(dataIni.getDate() + (14 - (diffDatas - 1))));
+        console.log(novaData.getDate() + "/0" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear());
         dataTermino.value = novaData.getDate() + "/" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear();
 
-        document.getElementById('infoDataIsolamento').innerHTML =
-            'Paciente com <strong class="col-indigo">' + diffDatas + '</strong> dias de Sintomas. 14 - ' + diffDatas + ' = <strong class="col-indigo"> +' + (14 - diffDatas) + '</strong> dias de Isolamento';
+        if (diffDatas > 14) {
+            document.getElementById('infoDataIsolamento').innerHTML =
+                '&rarr; Paciente com <strong class="col-indigo">' + diffDatas + '</strong> dias da <strong>Data de 1º Sintomas</strong>. <strong class="col-indigo">+ 0</strong> dias de Isolamento';
+        }
+        else {
+            document.getElementById('infoDataIsolamento').innerHTML =
+                '&rarr; Paciente com <strong class="col-indigo">' + diffDatas + '</strong> dias da <strong>Data de 1º Sintomas</strong>. 14 - ' + diffDatas + ' = <strong class="col-indigo"> + ' + (14 - diffDatas) + '</strong> dia(s) de Isolamento';
+        }
     });
 });
