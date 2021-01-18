@@ -269,14 +269,14 @@
                     <span class="font-16">Pessoas <strong>A MAIS</strong> que residem no mesmo endereço &rarr;</span>
                 </div>
                 <div class="wrap-input100 col-md-2 col-indigo" >
-                    <input id="numPessoas" type="number" class="input100" value="0" required style="height: 40px;"/>
+                    <input id="numPessoas" type="number" class="input100" value="0" min="0" required style="height: 40px;"/>
                     <span class="focus-input100"></span>
                     <label class="label-input100" for="numPessoas">
                         <i class="material-icons col-indigo">group_add</i>
                     </label>
                 </div>
                 <div class="col-md-1" style="margin-bottom: 0; padding: 0 0 0 15px;">
-                    <button type="button" class="btn btn-block bg-indigo waves-effect">
+                    <button type="button" class="btn btn-block bg-blue waves-effect">
                         <i class="material-icons">add</i>
                     </button>
                 </div>
@@ -287,18 +287,18 @@
                     </button>
                 </div>
                 <div class="col-md-12 m-t-10 col-indigo" style="padding-left: 0;">
-                <table class="table table-striped table-bordered" id="tabelaPessoas">
-                    <thead>
-                        <tr class="col-indigo">
-                            <th>#</th>
-                            <th>NOME COMPLETO</th>
-                            <th style="width: 60px;">DELETE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="rowPessoas"></tr>
-                    </tbody>
-                </table>
+                    <table class="table table-striped table-bordered" id="tabelaPessoas">
+                        <thead class="bg-blue">
+                            <tr class="col-white">
+                                <th>#</th>
+                                <th>NOME COMPLETO</th>
+                                <th style="width: 60px;">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="rowPessoas"></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

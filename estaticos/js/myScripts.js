@@ -72,14 +72,15 @@ function deleteAllRows(numPessoas) {
         numPessoas = parseInt(document.getElementById('numPessoas').value);
     }
     else if (numPessoas == 'x') {
-        numPessoas = parseInt(document.getElementById('numPessoas').value);
+        numPessoas = document.getElementsByClassName('numMembro').length;
+        for (i = 1; i <= numPessoas; i++) {
+            let id = '#id_nome_residente_' + i;
+            $(id).closest("tr").remove();
+        }
         localStorage.removeItem('numPessoas');
         document.getElementById('numPessoas').value = 0;
     }
-    for (i = 1; i <= numPessoas; i++) {
-        let id = '#nome_residente_' + i;
-        $(id).closest("tr").remove();
-    }
+    return;
 }
 
 /*function addRowPessoa() {
@@ -111,28 +112,27 @@ function addNovaPessoa(i) {
     row.insertCell(1).innerHTML = 
         '<div class="form-group" style="margin-bottom: 0px;">\n' +
         '<div class="form-line">\n' +
-        '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
+        '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" /> \n' +
         '</div>\n' +
         '</div>';
     row.insertCell(2).innerHTML = 
         '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
         '<i class="material-icons"> delete</i>\n' +
         '</button >';
+    return;
     
 }
 
 function corrigeIDsNumPessoas() {
     var numPessoas = parseInt(document.getElementById('numPessoas').value);
-    //var intNumPessoas = parseInt(numPessoas.value);
     var numMembros = document.getElementsByClassName('numMembro');
     var inputsPessoas = document.getElementsByClassName('inputPessoa');
 
     for (i = 0; i < numPessoas; i++) {
         numMembros[i].innerText = (i + 1) + "º";
-        inputsPessoas[i].id = "id_num_pessoa_" + (i + 1);
+        inputsPessoas[i].id = "id_nome_residente_" + (i + 1);
     }
-    console.log(numMembros);
-    console.log(inputsPessoas);
+    return;
 }
 
 function deleteCell(btndel) {
@@ -150,9 +150,8 @@ function deleteCell(btndel) {
             corrigeIDsNumPessoas();
         }
 
-    } else {
-        return false;
     }
+    return;
     
 }
 
@@ -241,6 +240,7 @@ function grauParentesco() {
         labelGrauParentesco.classList.remove('col-indigo');
         //iconGrauParentesco.classList.add('col-grey');
     }
+    return;
 }
 
 function assintomatico() {
@@ -272,6 +272,7 @@ function assintomatico() {
             outrosInputs[i].disabled = false;
         } 
     }
+    return;
 }
 
 function outrosSintomas() {
@@ -304,6 +305,7 @@ function outrosSintomas() {
         iconOutrosSintomas.classList.add('col-grey');
         iconOutrosSintomas.classList.add('not-allowed');
     }
+    return;
 }
 
 function DiffDates(dateIni, dateFim) {
