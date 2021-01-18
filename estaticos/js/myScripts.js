@@ -107,11 +107,11 @@ function addNovaPessoa(i) {
     var row = table.insertRow(2);
     var i = i;
 
-    row.insertCell(0).innerHTML = "<strong>Membro "+ i +"<strong>";
+    row.insertCell(0).innerHTML = "<strong class='numMembro'>"+ i + "º </strong>";
     row.insertCell(1).innerHTML = 
         '<div class="form-group" style="margin-bottom: 0px;">\n' +
         '<div class="form-line">\n' +
-        '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
+        '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
         '</div>\n' +
         '</div>';
     row.insertCell(2).innerHTML = 
@@ -121,26 +121,41 @@ function addNovaPessoa(i) {
     
 }
 
+function corrigeIDsNumPessoas() {
+    var numPessoas = parseInt(document.getElementById('numPessoas').value);
+    //var intNumPessoas = parseInt(numPessoas.value);
+    var numMembros = document.getElementsByClassName('numMembro');
+    var inputsPessoas = document.getElementsByClassName('inputPessoa');
+
+    for (i = 0; i < numPessoas; i++) {
+        numMembros[i].innerText = (i + 1) + "º";
+        inputsPessoas[i].id = "id_num_pessoa_" + (i + 1);
+    }
+    console.log(numMembros);
+    console.log(inputsPessoas);
+}
+
 function deleteCell(btndel) {
     if (typeof (btndel) == "object") {
         $(btndel).closest("tr").remove();
+
+        localStorage.setItem(
+            'numPessoas', (localStorage.getItem('numPessoas') - 1)
+        );
+
+        var numPessoas = document.getElementById('numPessoas');
+        numPessoas.value = (parseInt(numPessoas.value)) - 1;
+        
+        if (parseInt(numPessoas.value) > 0) {
+            corrigeIDsNumPessoas();
+        }
+
     } else {
         return false;
     }
-    localStorage.setItem(
-        'numPessoas', (localStorage.getItem('numPessoas') - 1)
-    );
     
-    var numPessoas = document.getElementById('numPessoas');
-    numPessoas.value = (parseInt(numPessoas.value)) - 1;
+}
 
-    //corrigeIDsNumPessoas(numPessoas.value);
-}
-function corrigeIDsNumPessoas(numPessoas) {
-    if(numPessoas != '0') {
-        
-    }
-}
 function noCPF() {
     var checkCPF = document.getElementById('semCPF');
 
@@ -277,7 +292,6 @@ function outrosSintomas() {
         iconOutrosSintomas.classList.remove('col-grey');
         iconOutrosSintomas.classList.add('col-red'); 
     }
-
     else {
         divOutrosSintomas.classList.remove('validate-input');
 
