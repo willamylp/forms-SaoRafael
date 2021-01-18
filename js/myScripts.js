@@ -39,7 +39,7 @@ $(function () {
 
 
 function noCPF() {
-    var checkCPF = document.getElementById('semCPF');
+    var checkCPF = document.getElementById('id_semCPF');
 
     var divCPF = document.getElementById('divCPF');
     var inputCPF = document.getElementById('id_cpf');

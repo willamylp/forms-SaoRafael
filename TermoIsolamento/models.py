@@ -45,8 +45,9 @@ class Paciente(models.Model):
     )
     # ---> INFORMAÇÕES PESSOAIS OK <---
     nome_paciente = models.CharField(max_length=200, blank=False, null=False)
-    cpf = models.CharField(max_length=14, blank=True)
-    cns = models.CharField(max_length=18, blank=True)
+    cpf = models.CharField(max_length=14, unique=True, blank=True, null=True)
+    semCPF = models.BooleanField(default=False)
+    cns = models.CharField(max_length=18, unique=True, blank=True, null=True)
     dt_nascimento = models.DateField(blank=False)
     dt_1_sintomas = models.DateField(blank=False)
     dt_ini_isolamento = models.DateField(blank=False)
@@ -81,6 +82,7 @@ class Paciente(models.Model):
 
 class Residente(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    num_pessoas = models.CharField(max_length=5, blank=True)
     nome_residente = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

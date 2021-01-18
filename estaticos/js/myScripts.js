@@ -46,12 +46,12 @@ $(function () {
 
 
 $(function () {
-    var numPessoas = $('#numPessoas');
+    var numPessoas = $('#id_num_pessoas');
     numPessoas.on('focusout', function () {
-        numPessoas = $('#numPessoas');
+        numPessoas = $('#id_num_pessoas');
         numPessoas = parseInt(numPessoas.val());
-        if (numPessoas < (parseInt(localStorage.getItem('numPessoas'))) ){
-            deleteAllRows( parseInt(localStorage.getItem('numPessoas')) );
+        if (numPessoas < (parseInt(localStorage.getItem('id_num_pessoas'))) ){
+            deleteAllRows(parseInt(localStorage.getItem('id_num_pessoas')) );
         }
         else {
             deleteAllRows(0);
@@ -62,14 +62,14 @@ $(function () {
             }
         }
         localStorage.setItem(
-            "numPessoas", $('#numPessoas').val()
+            "id_num_pessoas", $('#id_num_pessoas').val()
         );
     });
 });
 
 function deleteAllRows(numPessoas) {
     if (numPessoas == 0) {
-        numPessoas = parseInt(document.getElementById('numPessoas').value);
+        numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
     }
     else if (numPessoas == 'x') {
         numPessoas = document.getElementsByClassName('numMembro').length;
@@ -77,8 +77,8 @@ function deleteAllRows(numPessoas) {
             let id = '#id_nome_residente_' + i;
             $(id).closest("tr").remove();
         }
-        localStorage.removeItem('numPessoas');
-        document.getElementById('numPessoas').value = 0;
+        localStorage.removeItem('id_num_pessoas');
+        document.getElementById('id_num_pessoas').value = 0;
     }
     return;
 }
@@ -124,7 +124,7 @@ function addNovaPessoa(i) {
 }
 
 function corrigeIDsNumPessoas() {
-    var numPessoas = parseInt(document.getElementById('numPessoas').value);
+    var numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
     var numMembros = document.getElementsByClassName('numMembro');
     var inputsPessoas = document.getElementsByClassName('inputPessoa');
 
@@ -140,10 +140,10 @@ function deleteCell(btndel) {
         $(btndel).closest("tr").remove();
 
         localStorage.setItem(
-            'numPessoas', (localStorage.getItem('numPessoas') - 1)
+            'id_num_pessoas', (localStorage.getItem('id_num_pessoas') - 1)
         );
 
-        var numPessoas = document.getElementById('numPessoas');
+        var numPessoas = document.getElementById('id_num_pessoas');
         numPessoas.value = (parseInt(numPessoas.value)) - 1;
         
         if (parseInt(numPessoas.value) > 0) {
@@ -156,7 +156,7 @@ function deleteCell(btndel) {
 }
 
 function noCPF() {
-    var checkCPF = document.getElementById('semCPF');
+    var checkCPF = document.getElementById('id_semCPF');
 
     var divCPF = document.getElementById('divCPF');
     var inputCPF = document.getElementById('id_cpf');

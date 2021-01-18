@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-<form class="contact100-form validate-form">
+<form class="contact100-form validate-form" method="POST">
     {% csrf_token %}
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
         <div class="wrap-input100 validate-input col-md-6">
@@ -18,8 +18,10 @@
                 <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
             </label>
         </div>
-        <div class="alidate-input col-md-2 m-t-15 m-l-5">
-            <input type="checkbox" id="semCPF" name="semCPF" class="filled-in chk-col-indigo" onclick="noCPF();" />
+        <div class="col-md-2 m-t-15 m-l-5 demo-checkbox">
+            {{ form.semCPF }}
+            {% comment %} {{ form.semCPF|add_class:"filled-in chk-col-indigo" }} {% endcomment %}
+            {% comment %} <input type="checkbox" id="semCPF" name="semCPF" class="filled-in chk-col-indigo" onclick="noCPF();" /> {% endcomment %}
             <label for="semCPF"><strong style="font-size: 14pt">SEM CPF?</strong></label>
         </div>
 
@@ -62,7 +64,7 @@
 
         <div class="wrap-input100 validate-input col-md-3 m-l-5 not-allowed">
             <em class="col-indigo not-allowed"><strong>Término do Isolamento</strong>:</em>
-            {{ form.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"type:text"|attr:"placeholder:AUTOMÁTICO"|attr:"disabled"}}
+            {{ form.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"type:text"|attr:"placeholder:AUTOMÁTICO"|attr:"disabled"|attr:"required:true"}}
             {% comment %} <input id="dataTermino" class="input100 not-allowed" type="text" name="dataTermino" placeholder="AUTOMÁTICO" disabled> {% endcomment %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_fim_isolamento">
@@ -112,9 +114,9 @@
             </label>
         </div>
 
-        <div class="wrap-input100 validate-input col-md-4 not-allowed">
+        <div class="wrap-input100 validate-input col-md-4">
             <em class="col-indigo not-allowed"><strong>Data de Nascimento</strong>:</em>
-            {{ form.dt_nascimento|add_class:'input100 not-allowed'|attr:"type:date"}}
+            {{ form.dt_nascimento|add_class:'input100'|attr:"type:date"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_nascimento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
@@ -125,7 +127,7 @@
                 <i class="material-icons">accessibility</i>
                 <em>Resp. Pelo Paciente</em>
             </label>
-            <select class="form-control show-tick m-t-7" id="id_responsavel_pct" onchange="grauParentesco();">
+            <select class="form-control show-tick m-t-7" name="responsavel_pct" id="id_responsavel_pct" onchange="grauParentesco();">
                 {% for value, text in form.responsavel_pct.field.choices %}
                     <option value="{{ value }}">{{ text }}</option>
                 {% endfor %}
@@ -262,14 +264,15 @@
             </select>            
         </div> {% endcomment %}
 
-        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-t-20" style="padding-left: 0;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-20" style="padding-left: 0; width: 96%;">
         <hr/>
             <div class="body table-responsive" style="padding: 0">
                 <div class="col-md-6 col-indigo" style="margin: 10px 0 0 0; padding: 0;">
                     <span class="font-16">Pessoas <strong>A MAIS</strong> que residem no mesmo endereço &rarr;</span>
                 </div>
                 <div class="wrap-input100 col-md-2 col-indigo" >
-                    <input id="numPessoas" type="number" class="input100" value="0" min="0" required style="height: 40px;"/>
+                    {{ formResidente.num_pessoas|attr:"id:id_num_pessoas"|add_class:"input100"|attr:"name:numPessoas"|attr:"type:number"|attr:"value:0"|attr:"min:0"|attr:"required"|attr:"style:height:40px;" }}
+                    {% comment %} <input id="numPessoas" type="number" class="input100" value="0" min="0" required style="height: 40px;"/> {% endcomment %}
                     <span class="focus-input100"></span>
                     <label class="label-input100" for="numPessoas">
                         <i class="material-icons col-indigo">group_add</i>
