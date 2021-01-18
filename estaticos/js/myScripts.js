@@ -5,7 +5,7 @@ $(function () {
         input.mask('00000000000', { reverse: true });
     });
     input.on('focusout', function () {
-        input.maxLength = "14";
+        input.maxLength = "15";
         input.mask('(00)00000-0000', { reverse: true });
     });
 });
@@ -16,7 +16,7 @@ $(function () {
         input.mask('00000000000', { reverse: true });
     });
     input.on('focusout', function () {
-        input.maxLength = "14";
+        input.maxLength = "15";
         input.mask('(00)00000-0000', { reverse: true });
     });
 });
@@ -156,7 +156,7 @@ function deleteCell(btndel) {
 }
 
 function noCPF() {
-    var checkCPF = document.getElementById('id_semCPF');
+    var checkCPF = document.getElementById('semCPF');
 
     var divCPF = document.getElementById('divCPF');
     var inputCPF = document.getElementById('id_cpf');
@@ -339,8 +339,8 @@ $(function () {
         }
 
         var novaData = new Date(dataIni.setDate(dataIni.getDate() + (14 - (diffDatas - 1))));
-        console.log(novaData.getDate() + "/0" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear());
         dataTermino.value = novaData.getDate() + "/" + (novaData.getMonth() + 1) + "/" + novaData.getFullYear();
+
 
         if (diffDatas > 14) {
             document.getElementById('infoDataIsolamento').innerHTML =

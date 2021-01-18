@@ -18,11 +18,11 @@
                 <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
             </label>
         </div>
-        <div class="col-md-2 m-t-15 m-l-5 demo-checkbox">
-            {{ form.semCPF }}
-            {% comment %} {{ form.semCPF|add_class:"filled-in chk-col-indigo" }} {% endcomment %}
+        <div class="col-md-2 m-t-15 m-l-5">
+            {% comment %} {{ form.semCPF }} {% endcomment %}
+            {{ form.semCPF|add_class:"filled-in chk-col-indigo"|attr:"id:id_semCPF"|attr:"onclick:noCPF();" }}
             {% comment %} <input type="checkbox" id="semCPF" name="semCPF" class="filled-in chk-col-indigo" onclick="noCPF();" /> {% endcomment %}
-            <label for="semCPF"><strong style="font-size: 14pt">SEM CPF?</strong></label>
+            <label for="id_semCPF"><strong style="font-size: 14pt">SEM CPF?</strong></label>
         </div>
 
         <!-- ======== -->
@@ -64,11 +64,11 @@
 
         <div class="wrap-input100 validate-input col-md-3 m-l-5 not-allowed">
             <em class="col-indigo not-allowed"><strong>Término do Isolamento</strong>:</em>
-            {{ form.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"type:text"|attr:"placeholder:AUTOMÁTICO"|attr:"disabled"|attr:"required:true"}}
+            {{ form.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"placeholder:AUTOMÁTICO"|attr:"required:true"}}
             {% comment %} <input id="dataTermino" class="input100 not-allowed" type="text" name="dataTermino" placeholder="AUTOMÁTICO" disabled> {% endcomment %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_fim_isolamento">
-                <i class="material-icons col-indigo m-t-20">date_range</i>
+                <i class="material-icons col-indigo m-t-20 not-allowed">date_range</i>
             </label>
         </div>
         <div class="col-md-12" style="padding-left: 0;">
