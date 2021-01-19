@@ -106,8 +106,8 @@ function deleteAllRows(numPessoas) {
 } */
 function addFields() {
     // Number of inputs to create
-    var num_pessoas = document.getElementById("id_num_pessoas").value;
-    if ((num_pessoas != '') || (parseInt(num_pessoas) > 0 )) {
+    var num_pessoas = parseInt(document.getElementById("id_num_pessoas").value);
+    if ((num_pessoas != '') || (num_pessoas > 0 )) {
         // Container <div> where dynamic content will be placed
         var container = document.getElementById("containerPessoas");
         // Clear previous contents of the container
@@ -115,6 +115,20 @@ function addFields() {
             container.removeChild(container.lastChild);
         }
         for (i = 0; i < num_pessoas; i++) {
+            // var div = document.createElement('div');
+            // div.classList = "col-md-1";
+            // container.appendChild(div);
+            // div = document.getElementById("div_" + i);
+
+
+
+            var div2 = document.createElement('div');
+            div2.classList  = "wrap-input100 col-md-12 col-indigo";
+            div2.id         = "div2_" + i;
+            div2.style      = "margin-bottom: 10px";
+            container.appendChild(div2);
+            div2 = document.getElementById('div2_'+i);         
+
             // Append a node with a random text
             //container.appendChild(document.createTextNode("id_num_pessoas " + (i + 1)));
             // Create an <input> element, set its type and name attributes
@@ -122,11 +136,27 @@ function addFields() {
             input.type          = "text";
             input.name          = "pessoa_" + i;
             input.id            = "id_nome_residente_" + i;
-            input.class         = "form-control bg-col-t inputPessoa";
-            input.placeholder   = "Inserir Nome Completo";
-            input.required      = true;
+            input.classList     = "input100 inputPessoa m-l-10";
+            input.placeholder   = (i+1) + "º - Inserir Nome Completo";
+            input.required      = 'true';
+            input.style         = 'height: 40px;';
+            div2.appendChild(input);
 
-            container.appendChild(input);
+            /* Criando Elemento <span> */
+            var span = document.createElement('span');
+            span.classList = "focus-input100";
+            div2.appendChild(span);
+
+            /* Criando Elemento <label> */
+            var label = document.createElement('label');
+            label.classList = "label-input100";
+            label.for = "id_nome_residente_" + i;
+            label.id = "label_" + i;
+            div2.appendChild(label);
+
+            label = document.getElementById("label_" + i);
+            label.innerHTML = '<i class="material-icons col-indigo">person</i>';
+            
             // Append a line break 
             //container.appendChild(document.createElement("br"));
         }

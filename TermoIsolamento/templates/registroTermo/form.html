@@ -202,13 +202,13 @@
                 {% endif %}
             </div>
             <div id="divOutrosSintomas" name="divOutrosSintomas" class="wrap-input100 col-md-12">
-        {% comment %} <label class="col-grey"  id="labelOustrosSintomas">Grau de Parentesco</label> {% endcomment %}
-            {{ formPaciente.outros_sintomas|attr:"id:id_outros_sintomas"|attr:"name:id_outros_sintomas"|add_class:"input100 not-allowed"|attr:"placeholder:Outros Sintomas"|attr:"style:padding: 0 0px 0 25px"|attr:"disabled"}}
-            <span class="focus-input100"></span>
-            <label class="label-input100" for="id_outros_sintomas" style="left: 0; width: 40px">
-                <i id="iconOutrosSintomas" class="material-icons col-grey not-allowed">add_circle</i>
-            </label>
-        </div>
+            {% comment %} <label class="col-grey"  id="labelOustrosSintomas">Grau de Parentesco</label> {% endcomment %}
+                {{ formPaciente.outros_sintomas|attr:"id:id_outros_sintomas"|attr:"name:id_outros_sintomas"|add_class:"input100 not-allowed"|attr:"placeholder:Outros Sintomas"|attr:"style:padding: 0 0px 0 25px"|attr:"disabled"}}
+                <span class="focus-input100"></span>
+                <label class="label-input100" for="id_outros_sintomas" style="left: 0; width: 40px">
+                    <i id="iconOutrosSintomas" class="material-icons col-grey not-allowed">add_circle</i>
+                </label>
+            </div>
         </div>
         <div class="wrap-input100 col-md-6 m-l-10">
             <br>
@@ -265,59 +265,36 @@
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-20" style="padding-left: 0; width: 96%;">
             <hr/>
-            <div class="body table-responsive" style="padding: 0">
-                <div class="col-md-6 col-indigo" style="margin: 10px 0 0 0; padding: 0;">
-                    <span class="font-16">Pessoas <strong>A MAIS</strong> que residem no mesmo endereço &rarr;</span>
-                </div>
-                <div class="wrap-input100 col-md-2 col-indigo" >
-                    {{ formPaciente.num_pessoas|attr:"id:id_num_pessoas"|add_class:"input100"|attr:"name:numPessoas"|attr:"type:number"|attr:"value:0"|attr:"min:0"|attr:"required"|attr:"style:height:36px;" }}
-                    {% comment %} <input id="numPessoas" type="number" class="input100" value="0" min="0" required style="height: 40px;"/> {% endcomment %}
-                    <span class="focus-input100"></span>
-                    <label class="label-input100" for="numPessoas">
-                        <i class="material-icons col-indigo">group_add</i>
-                    </label>
-                </div>
-                <div class="col-md-1" style="margin-bottom: 0; padding: 0 0 0 15px;">
-                    <button type="button" class="btn btn-block bg-blue waves-effect" onclick="addFields();">
-                        <i class="material-icons">add</i>
-                    </button>
-                </div>
-                <div class="col-md-3" align="right" style="margin-bottom: 0;">
-                    <button type="button" class="btn btn-block bg-red waves-effect" onclick="deleteAllRows('x');">
-                        <span class="font-12">DELETAR TODOS</span>&nbsp;
-                        <i class="material-icons">delete_forever</i>
-                    </button>
-                </div>
-                <div id="containerPessoas">
-                    <div class="wrap-input100 col-md-11 col-indigo">
-                        <span class="focus-input100"></span>
-                        <label class="label-input100" for="numPessoas">
-                            <i class="material-icons col-indigo">person</i>
-                        </label>
-                    </div>
-                </div>
-                {% comment %} <div class="col-md-12 m-t-10 col-indigo" style="padding-left: 0;">
-                    <div class="form-group col-md-12" style="margin-bottom: 0px;">
-                        <div class="form-line" id="containerPessoas">
-                        </div>
-                    </div>
-
-                    <table class="table table-striped table-bordered" id="tabelaPessoas">
-                        <thead class="bg-blue">
-                            <tr class="col-white">
-                                <th>#</th>
-                                <th>NOME COMPLETO</th>
-                                <th style="width: 60px;">DELETE</th>
-                            </tr>
-                        </thead>
-                        <tbody id="listaPessoas">
-                            
-                        </tbody>
-                    </table>
-                </div> {% endcomment %}
+            {% comment %} <div class="body table-responsive" style="padding: 0"> {% endcomment %}
+            <div class="col-md-6 col-indigo" style="margin: 10px 0 0 0; padding: 0;">
+                <span class="font-16">Pessoas <strong>A MAIS</strong> que residem no mesmo endereço &rarr;</span>
+            </div>
+            <div class="wrap-input100 col-md-2 col-indigo" >
+                {{ formPaciente.num_pessoas|attr:"id:id_num_pessoas"|add_class:"input100"|attr:"name:numPessoas"|attr:"type:number"|attr:"value:0"|attr:"min:0"|attr:"required"|attr:"style:height:36px;" }}
+                {% comment %} <input id="numPessoas" type="number" class="input100" value="0" min="0" required style="height: 40px;"/> {% endcomment %}
+                <span class="focus-input100"></span>
+                <label class="label-input100" for="numPessoas">
+                    <i class="material-icons col-indigo">group_add</i>
+                </label>
+            </div>
+            <div class="col-md-1" style="margin-bottom: 0; padding: 0 0 0 15px;">
+                <button type="button" class="btn btn-block bg-blue waves-effect" onclick="addFields();">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+            <div class="col-md-3" align="right" style="margin-bottom: 0;">
+                <button type="button" class="btn btn-block bg-red waves-effect" onclick="deleteAllRows('x');">
+                    <span class="font-12">DELETAR TODOS</span>&nbsp;
+                    <i class="material-icons">delete_forever</i>
+                </button>
             </div>
         </div>
     </div>
+    <div id="containerPessoas" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; width: 92%;">
+        
+    </div>
+    
+
 
 
     <!-- =========== -->
