@@ -43,10 +43,12 @@ $(function () {
     });
 });
 
-
+/*
 
 $(function () {
     var numPessoas = $('#id_num_pessoas');
+    var tbody = $('#listaPessoas');
+
     numPessoas.on('focusout', function () {
         numPessoas = $('#id_num_pessoas');
         numPessoas = parseInt(numPessoas.val());
@@ -66,7 +68,7 @@ $(function () {
         );
     });
 });
-
+*/
 function deleteAllRows(numPessoas) {
     if (numPessoas == 0) {
         numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
@@ -102,25 +104,61 @@ function deleteAllRows(numPessoas) {
             '</button>\n';
     }
 } */
+function addFields() {
+    // Number of inputs to create
+    var num_pessoas = document.getElementById("id_num_pessoas").value;
+    if ((num_pessoas != '') || (parseInt(num_pessoas) > 0 )) {
+        // Container <div> where dynamic content will be placed
+        var container = document.getElementById("containerPessoas");
+        // Clear previous contents of the container
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+        }
+        for (i = 0; i < num_pessoas; i++) {
+            // Append a node with a random text
+            //container.appendChild(document.createTextNode("id_num_pessoas " + (i + 1)));
+            // Create an <input> element, set its type and name attributes
+            var input = document.createElement("input");
+            input.type          = "text";
+            input.name          = "pessoa_" + i;
+            input.id            = "id_nome_residente_" + i;
+            input.class         = "form-control bg-col-t inputPessoa";
+            input.placeholder   = "Inserir Nome Completo";
+            input.required      = true;
 
+            container.appendChild(input);
+            // Append a line break 
+            //container.appendChild(document.createElement("br"));
+        }
+    }
+    else {
+        return;
+    }
+}
 function addNovaPessoa(i) {
-    var table = document.getElementById('tabelaPessoas');
-    var row = table.insertRow(2);
     var i = i;
+    var tbody = document.getElementById('listaPessoas');
+    tbody.innerHTML = '<tr id="trPessoa_"'+ i +'></tr>';
 
-    row.insertCell(0).innerHTML = "<strong class='numMembro'>"+ i + "º </strong>";
-    row.insertCell(1).innerHTML = 
-        '<div class="form-group" style="margin-bottom: 0px;">\n' +
-        '<div class="form-line">\n' +
-        '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" /> \n' +
-        '</div>\n' +
-        '</div>';
-    row.insertCell(2).innerHTML = 
-        '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
-        '<i class="material-icons"> delete</i>\n' +
-        '</button >';
+    var tr = document.getElementById('trPessoa_'+i);
+    tr.innerHTML =
+        '<td>' +
+            '<strong class="numMembro">' + (i+1) + 'º </strong>'+
+        '</td>' +
+        '<td>' +
+            '<div class="form-group" style="margin-bottom: 0px;">' +
+                '<div class="form-line">' +
+                    '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" />' +
+                '</div>' +
+            '</div>' +
+        '</td>' +
+        '<td>' +
+            '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">' +
+                '<i class="material-icons">delete</i>' +
+            '</button>' +
+        '</td>'
+
     return;
-    
 }
 
 function corrigeIDsNumPessoas() {
@@ -149,14 +187,13 @@ function deleteCell(btndel) {
         if (parseInt(numPessoas.value) > 0) {
             corrigeIDsNumPessoas();
         }
-
     }
     return;
     
 }
 
 function noCPF() {
-    var checkCPF = document.getElementById('semCPF');
+    var checkCPF = document.getElementById('id_semCPF');
 
     var divCPF = document.getElementById('divCPF');
     var inputCPF = document.getElementById('id_cpf');

@@ -54,37 +54,38 @@ class Paciente(models.Model):
     dt_ini_isolamento = models.DateField(blank=False)
     dt_fim_isolamento = models.CharField(max_length=20, blank=False, null=False, default='AUTOMÁTICO')
     responsavel_pct = models.CharField(max_length=20, blank=False, choices=RESPONSAVEL_PCT, default='')
-    grau_parentesco = models.CharField(max_length=50, blank=True)
+    grau_parentesco = models.CharField(max_length=50, blank=True, null=True)
 
     # ---> INFORMAÇÕES CLÍNICAS OK <---
     sintomas = MultiSelectField(blank=False, choices=SINTOMAS)
-    condicoes = MultiSelectField(blank=True, choices=CONDICOES)
-    outros_sintomas = models.CharField(max_length=200, blank=True)
+    condicoes = MultiSelectField(blank=True, choices=CONDICOES, null=True)
+    outros_sintomas = models.CharField(max_length=200, blank=True, null=True)
     #hora_coleta = models.TimeField(auto_now=False, auto_now_add=False, blank=True)
     #exame_solicitado = models.CharField(max_length=50, blank=False, choices=EXAME_SOLICITADO, default='')
 
     # ---> ENDEREÇO OK <---
     endereco = models.CharField(max_length=100, blank=False)
     num_endereco = models.CharField(max_length=10, blank=False)
-    complemento = models.CharField(max_length=100, blank=True)
+    complemento = models.CharField(max_length=100, blank=True, null=True)
     bairro = models.CharField(max_length=100, blank=False)
-    ponto_referencia = models.CharField(max_length=100, blank=True)
+    ponto_referencia = models.CharField(max_length=100, blank=True, null=True)
 
     # ---> CONTATO OK <---
     telefone = models.CharField(max_length=20, blank=False)
-    telefone2 = models.CharField(max_length=20, blank=True)
+    telefone2 = models.CharField(max_length=20, blank=True, null=True)
 
     # ---> PROFISSIONAIS OK <---
-    nome_acs = models.CharField(max_length=100, blank=True)
+    nome_acs = models.CharField(max_length=100, blank=True, null=True)
     profis_informante = models.CharField(max_length=100, blank=False)
+
+    num_pessoas = models.CharField(max_length=5, blank=True, null=True)
 
     def __str__(self):
         return self.nome_paciente
 
 class Residente(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    num_pessoas = models.CharField(max_length=5, blank=True)
-    nome_residente = models.CharField(max_length=200, blank=True)
+    nome_residente = models.CharField(max_length=200, blank=True, null=True)
     
     def __str__(self):
         return self.nome_residente

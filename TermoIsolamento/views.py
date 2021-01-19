@@ -6,21 +6,40 @@ from Home.urls import home
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+import logging
+
+def generateLogs(request, form):
+    logging.basicConfig(filename='mylog2.log', level=logging.DEBUG)
+    if (request.method == 'POST'):
+        logging.debug('request.method=POST')
+        logging.debug('form=%s', form)
+
+        if (form.is_valid()):
+            logging.debug('form is valid')
+            myForm = form.save()
+            logging.debug('called form.save(), result=%s', myForm)
+
+        else:
+            logging.debug('form is not valid')
+    else:
+        logging.debug('request.method is not POST')
 
 
 @login_required
 def RegistroTermo(request):
     formPaciente = PacienteForm(request.POST or None)
     formResidente = ResidenteForm(request.POST or None)
-    print("\n>>>>>", request.POST)
+    generateLogs(request, formPaciente)
+
+    #print("\n>>>>>", request.POST)
     #formResidente = Residente(request.POST or None)
     if(formPaciente.is_valid()):
-        print(" >> Form Válido! <<")
         formPaciente.save()
-        print("\n>>>>>", request.POST)
-        if((request.POST['num_pessoas'] != '') or (int(request.POST['num_pessoas']) > 0)):
+        #print("\n>>>>>", request.POST)
+        if((request.POST['num_pessoas'] != None) or (int(request.POST['num_pessoas']) > 0)):
+            print('>>>>>>>>>>>>>> ', request.POST['id_nome_residente_0'])
             for i in range(int(request.POST['num_pessoas'])):
-                if(request.POST['cpf'] != ''):
+                if(request.POST['cpf'] != None):
                     Residente.objects.create(
                         paciente=Paciente.objects.get(
                             pk=Paciente.objects.filter(cpf=request.POST['cpf'])[:1]
@@ -38,7 +57,7 @@ def RegistroTermo(request):
         
         messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
         return redirect('../ListarTermos')
-    return render(request, 'registroTermo/content.html', {'form': formPaciente, 'formResidente': formResidente})
+    return render(request, 'registroTermo/content.html', {'formPaciente': formPaciente, 'formResidente': formResidente})
 
 @login_required
 def ListarTermos(request):

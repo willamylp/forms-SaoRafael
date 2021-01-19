@@ -1,10 +1,11 @@
 {% load widget_tweaks %}
 
-<form class="contact100-form validate-form" method="POST">
+<form class="contact100-form " method="POST">
     {% csrf_token %}
+
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
-        <div class="wrap-input100 validate-input col-md-6">
-            {{ form.nome_paciente|add_class:'input100'|attr:"placeholder:Nome Completo do Paciente" }}
+		<div class="wrap-input100 validate-input col-md-6">
+			{{ formPaciente.nome_paciente|add_class:'input100'|attr:"placeholder:Nome Completo do Paciente" }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_nome_paciente">
                 <i class="material-icons col-indigo">person</i>
@@ -12,23 +13,21 @@
         </div>
         
         <div id="divCPF" name="divCPF" class="wrap-input100 col-md-3 m-l-5">
-            {{ form.cpf|attr:"id:id_cpf"|add_class:'input100'|attr:"placeholder:CPF"|attr:"name:id_cpf" }}
+            {{ formPaciente.cpf|attr:"id:id_cpf"|add_class:'input100'|attr:"placeholder:CPF" }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_cpf">
                 <i id="iconInputCPF" name="iconInputCPF" class="material-icons col-indigo">assignment_ind</i>
             </label>
         </div>
         <div class="col-md-2 m-t-15 m-l-5">
-            {% comment %} {{ form.semCPF }} {% endcomment %}
-            {{ form.semCPF|add_class:"filled-in chk-col-indigo"|attr:"id:id_semCPF"|attr:"onclick:noCPF();" }}
-            {% comment %} <input type="checkbox" id="semCPF" name="semCPF" class="filled-in chk-col-indigo" onclick="noCPF();" /> {% endcomment %}
+            {{ formPaciente.semCPF|add_class:"filled-in chk-col-indigo"|attr:"id:id_semCPF"|attr:"onclick:noCPF();" }}
             <label for="id_semCPF"><strong style="font-size: 14pt">SEM CPF?</strong></label>
         </div>
 
         <!-- ======== -->
         
         <div id="divCNS" class="wrap-input100 col-md-4">
-            {{ form.cns|add_class:'input100'|attr:"placeholder:Cartão do SUS"|attr:"name:id_cns" }}
+            {{ formPaciente.cns|add_class:'input100'|attr:"placeholder:Cartão do SUS"|attr:"name:id_cns" }}
             {% comment %} <input id="cns" class="input100" type="text" name="cns" placeholder="Cartão do SUS"> {% endcomment %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_cns">
@@ -37,7 +36,7 @@
         </div>
 
         <div class="wrap-input100 validate-input col-md-7 m-l-5" style="width: 59%;">
-            {{ form.profis_informante|add_class:'input100'|attr:"placeholder:Nome do Profissional Informante" }}
+            {{ formPaciente.profis_informante|add_class:'input100'|attr:"placeholder:Nome do Profissional Informante" }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_profis_informante">
                 <i class="material-icons col-indigo">person_pin</i>
@@ -47,7 +46,7 @@
         <!-- =========== -->
         <div class="wrap-input100 validate-input col-md-4">
             <em class="col-indigo">Data dos <strong>1º Sintomas</strong>:</em>
-            {{ form.dt_1_sintomas|add_class:'input100'|attr:"type:date"}}
+            {{ formPaciente.dt_1_sintomas|add_class:'input100'|attr:"type:date"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_1_sintomas">
                 <i class="material-icons col-indigo m-t-20">today</i>
@@ -55,7 +54,7 @@
         </div>
         <div class="wrap-input100 validate-input col-md-4 m-l-5">
             <em class="col-indigo"><strong>Início do Isolamento:</strong></em>
-            {{ form.dt_ini_isolamento|add_class:'input100'|attr:"type:date"}}
+            {{ formPaciente.dt_ini_isolamento|add_class:'input100'|attr:"type:date"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_ini_isolamento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
@@ -64,7 +63,7 @@
 
         <div class="wrap-input100 validate-input col-md-3 m-l-5 not-allowed">
             <em class="col-indigo not-allowed"><strong>Término do Isolamento</strong>:</em>
-            {{ form.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"placeholder:AUTOMÁTICO"|attr:"required:true"}}
+            {{ formPaciente.dt_fim_isolamento|add_class:'input100 not-allowed'|attr:"placeholder:AUTOMÁTICO"|attr:"required:true"}}
             {% comment %} <input id="dataTermino" class="input100 not-allowed" type="text" name="dataTermino" placeholder="AUTOMÁTICO" disabled> {% endcomment %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_fim_isolamento">
@@ -76,7 +75,7 @@
         </div>
     
         <div class="wrap-input100 validate-input col-md-6">
-            {{ form.endereco|add_class:"input100"|attr:"placeholder:Nome da Rua, Avenida, Travessa..." }}
+            {{ formPaciente.endereco|add_class:"input100"|attr:"placeholder:Nome da Rua, Avenida, Travessa..." }}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_endereco">
                 <i class="material-icons col-indigo">home</i>
@@ -84,7 +83,7 @@
         </div>
 
         <div class="wrap-input100 validate-input col-md-2 m-l-5">
-            {{ form.num_endereco|add_class:"input100"|attr:"placeholder:Nº"}}
+            {{ formPaciente.num_endereco|add_class:"input100"|attr:"placeholder:Nº"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_num_endereco">
                 <i class="material-icons col-indigo">looks_one</i>
@@ -92,7 +91,7 @@
         </div>
 
         <div class="wrap-input100 col-md-3 m-l-5">
-            {{ form.complemento|add_class:"input100"|attr:"placeholder:Complemento"}}
+            {{ formPaciente.complemento|add_class:"input100"|attr:"placeholder:Complemento"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_complemento">
                 <i class="material-icons">home</i>
@@ -100,14 +99,14 @@
         </div>
 
         <div class="wrap-input100 validate-input col-md-6">
-            {{ form.bairro|add_class:"input100"|attr:"placeholder:Bairro"}}
+            {{ formPaciente.bairro|add_class:"input100"|attr:"placeholder:Bairro"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_bairro">
                 <i class="material-icons col-indigo">nature_people</i>
             </label>
         </div>
         <div class="wrap-input100 col-md-5 m-l-5" style="width: 42.25%;">
-            {{ form.ponto_referencia|add_class:"input100"|attr:"placeholder:Ponto de Referência"}}
+            {{ formPaciente.ponto_referencia|add_class:"input100"|attr:"placeholder:Ponto de Referência"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_ponto_referencia">
                 <i class="material-icons">location_on</i>
@@ -116,7 +115,7 @@
 
         <div class="wrap-input100 validate-input col-md-4">
             <em class="col-indigo not-allowed"><strong>Data de Nascimento</strong>:</em>
-            {{ form.dt_nascimento|add_class:'input100'|attr:"type:date"}}
+            {{ formPaciente.dt_nascimento|add_class:'input100'|attr:"type:date"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_nascimento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
@@ -128,7 +127,7 @@
                 <em>Resp. Pelo Paciente</em>
             </label>
             <select class="form-control show-tick m-t-7" name="responsavel_pct" id="id_responsavel_pct" onchange="grauParentesco();">
-                {% for value, text in form.responsavel_pct.field.choices %}
+                {% for value, text in formPaciente.responsavel_pct.field.choices %}
                     <option value="{{ value }}">{{ text }}</option>
                 {% endfor %}
             </select>            
@@ -136,7 +135,7 @@
 
         <div id="divGrauParentesco" name="divGrauParentesco" class="wrap-input100 col-md-4 m-l-10">
         <label class="col-grey"  id="labelGrauParentesco">Grau de Parentesco</label>
-            {{ form.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"style:height: 50px"|attr:"disabled"}}
+            {{ formPaciente.grau_parentesco|attr:"id:id_grau_parentesco"|attr:"name:id_grau_parentesco"|add_class:"input100 not-allowed"|attr:"placeholder:O Próprio Paciente"|attr:"style:height: 50px"|attr:"disabled"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_grau_parentesco">
                 <i id="iconGrauParentesco" class="material-icons m-t-20 col-grey not-allowed">group</i>
@@ -144,21 +143,21 @@
         </div>
 
         <div class="wrap-input100 validate-input col-md-3">
-            {{ form.telefone|add_class:"input100"|attr:"placeholder:Nº Telefone"}}
+            {{ formPaciente.telefone|add_class:"input100"|attr:"placeholder:Nº Telefone"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_telefone">
                 <i class="material-icons col-indigo">phone_forwarded</i>
             </label>
         </div>
         <div class="wrap-input100 col-md-3 m-l-5">
-            {{ form.telefone2|add_class:"input100"|attr:"placeholder:Nº Secundário"}}
+            {{ formPaciente.telefone2|add_class:"input100"|attr:"placeholder:Nº Secundário"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_telefone2">
                 <i class="material-icons">phone</i>
             </label>
         </div>
         <div class="wrap-input100 col-md-5 m-l-5">
-            {{ form.nome_acs|add_class:"input100"|attr:"placeholder:Nome do ACS"}}
+            {{ formPaciente.nome_acs|add_class:"input100"|attr:"placeholder:Nome do ACS"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_nome_acs">
                 <i class="material-icons">person_pin</i>
@@ -171,10 +170,10 @@
             <div class="demo-radio-button">
                 <br>
                 {% if "AtualizarTermo" in request.path %}
-                    {% for value, text in form.sintomas.field.choices %}
+                    {% for value, text in formPaciente.sintomas.field.choices %}
                     <input type="checkbox"
                         id="id_sintomas_{{ forloop.counter0 }}"
-                        name="sintomas_{{ forloop.counter0 }}"
+                        name="sintomas"
                         {% if value == 'Assintomático' %} class="filled-in chk-col-indigo" 
                         {% else %} class="filled-in chk-col-red" 
                         {% endif %}
@@ -186,16 +185,16 @@
                     <br>
                     {% endfor %}
                 {% else %}
-                    {% for value, text in form.sintomas.field.choices %}
+                    {% for value, text in formPaciente.sintomas.field.choices %}
                         <input type="checkbox"
                             id="id_sintomas_{{ forloop.counter0 }}"
-                            name="sintomas_{{ forloop.counter0 }}"
+                            name="sintomas"
                             {% if value == 'Assintomático' %} class="filled-in chk-col-indigo" onclick='assintomatico();'
                             {% else %} class="filled-in chk-col-red" 
                             {% endif %}
                             value="{{ value }}"
                             {% if value == 'Outros' %} onclick='outrosSintomas();' {% endif %}
-                            {% if value in form.sintomas %} checked {% endif %}
+                            {% if value in formPaciente.sintomas %} checked {% endif %}
                         />
                         <label for="id_sintomas_{{ forloop.counter0 }}">{{ text }}</label>
                         <br>
@@ -204,7 +203,7 @@
             </div>
             <div id="divOutrosSintomas" name="divOutrosSintomas" class="wrap-input100 col-md-12">
         {% comment %} <label class="col-grey"  id="labelOustrosSintomas">Grau de Parentesco</label> {% endcomment %}
-            {{ form.outros_sintomas|attr:"id:id_outros_sintomas"|attr:"name:id_outros_sintomas"|add_class:"input100 not-allowed"|attr:"placeholder:Outros Sintomas"|attr:"style:padding: 0 0px 0 25px"|attr:"disabled"}}
+            {{ formPaciente.outros_sintomas|attr:"id:id_outros_sintomas"|attr:"name:id_outros_sintomas"|add_class:"input100 not-allowed"|attr:"placeholder:Outros Sintomas"|attr:"style:padding: 0 0px 0 25px"|attr:"disabled"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_outros_sintomas" style="left: 0; width: 40px">
                 <i id="iconOutrosSintomas" class="material-icons col-grey not-allowed">add_circle</i>
@@ -217,10 +216,10 @@
             <div class="demo-radio-button">
                 <br>
                 {% if "AtualizarTermo" in request.path %}
-                    {% for value, text in form.condicoes.field.choices %}
+                    {% for value, text in formPaciente.condicoes.field.choices %}
                     <input type="checkbox"
                         id="id_condicoes_{{ forloop.counter0 }}"
-                        name="condicoes_{{ forloop.counter0 }}"
+                        name="condicoes"
                         class="filled-in chk-col-red"
                         value="{{ value }}"
                         {% if value in listCondicoes %} checked {% endif %}
@@ -229,13 +228,13 @@
                     <br>
                     {% endfor %}
                 {% else %}
-                    {% for value, text in form.condicoes.field.choices %}
+                    {% for value, text in formPaciente.condicoes.field.choices %}
                         <input type="checkbox"
                             id="id_condicoes_{{ forloop.counter0 }}"
-                            name="condicoes_{{ forloop.counter0 }}"
+                            name="condicoes"
                             class="filled-in chk-col-red"
                             value="{{ value }}"
-                            {% if value in form.condicoes %} checked {% endif %}
+                            {% if value in formPaciente.condicoes %} checked {% endif %}
                         />
                         <label for="id_condicoes_{{ forloop.counter0 }}">{{ text }}</label>
                         <br>
@@ -246,7 +245,7 @@
         
         {% comment %} <div class="wrap-input100 col-md-3 m-l-10">
         <label class="col-grey m-t-5">Hora da Coleta</label>
-            {{ form.hora_coleta|add_class:"input100"|attr:"placeholder:HH:MM"}}
+            {{ formPaciente.hora_coleta|add_class:"input100"|attr:"placeholder:HH:MM"}}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_hora_coleta">
                 <i class="material-icons m-t-20">access_time</i>
@@ -258,20 +257,20 @@
                 <em>Exame Solicitado</em>
             </label>
             <select class="form-control show-tick m-t-17" id="id_exame_solicitado">
-                {% for value, text in form.exame_solicitado.field.choices %}
+                {% for value, text in formPaciente.exame_solicitado.field.choices %}
                     <option value="{{ value }}">{{ text }}</option>
                 {% endfor %}
             </select>            
         </div> {% endcomment %}
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-20" style="padding-left: 0; width: 96%;">
-        <hr/>
+            <hr/>
             <div class="body table-responsive" style="padding: 0">
                 <div class="col-md-6 col-indigo" style="margin: 10px 0 0 0; padding: 0;">
                     <span class="font-16">Pessoas <strong>A MAIS</strong> que residem no mesmo endereço &rarr;</span>
                 </div>
                 <div class="wrap-input100 col-md-2 col-indigo" >
-                    {{ formResidente.num_pessoas|attr:"id:id_num_pessoas"|add_class:"input100"|attr:"name:numPessoas"|attr:"type:number"|attr:"value:0"|attr:"min:0"|attr:"required"|attr:"style:height:40px;" }}
+                    {{ formPaciente.num_pessoas|attr:"id:id_num_pessoas"|add_class:"input100"|attr:"name:numPessoas"|attr:"type:number"|attr:"value:0"|attr:"min:0"|attr:"required"|attr:"style:height:36px;" }}
                     {% comment %} <input id="numPessoas" type="number" class="input100" value="0" min="0" required style="height: 40px;"/> {% endcomment %}
                     <span class="focus-input100"></span>
                     <label class="label-input100" for="numPessoas">
@@ -279,7 +278,7 @@
                     </label>
                 </div>
                 <div class="col-md-1" style="margin-bottom: 0; padding: 0 0 0 15px;">
-                    <button type="button" class="btn btn-block bg-blue waves-effect">
+                    <button type="button" class="btn btn-block bg-blue waves-effect" onclick="addFields();">
                         <i class="material-icons">add</i>
                     </button>
                 </div>
@@ -289,7 +288,20 @@
                         <i class="material-icons">delete_forever</i>
                     </button>
                 </div>
-                <div class="col-md-12 m-t-10 col-indigo" style="padding-left: 0;">
+                <div id="containerPessoas">
+                    <div class="wrap-input100 col-md-11 col-indigo">
+                        <span class="focus-input100"></span>
+                        <label class="label-input100" for="numPessoas">
+                            <i class="material-icons col-indigo">person</i>
+                        </label>
+                    </div>
+                </div>
+                {% comment %} <div class="col-md-12 m-t-10 col-indigo" style="padding-left: 0;">
+                    <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                        <div class="form-line" id="containerPessoas">
+                        </div>
+                    </div>
+
                     <table class="table table-striped table-bordered" id="tabelaPessoas">
                         <thead class="bg-blue">
                             <tr class="col-white">
@@ -298,11 +310,11 @@
                                 <th style="width: 60px;">DELETE</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr id="rowPessoas"></tr>
+                        <tbody id="listaPessoas">
+                            
                         </tbody>
                     </table>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </div>
