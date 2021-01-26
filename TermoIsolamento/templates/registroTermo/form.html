@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-<form class="contact100-form " method="POST">
+<form class="contact100-form" method="POST" id="form">
     {% csrf_token %}
 
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
@@ -283,16 +283,43 @@
                 </button>
             </div>
             <div class="col-md-3" align="right" style="margin-bottom: 0;">
-                <button type="button" class="btn btn-block bg-red waves-effect" onclick="deleteAllRows('x');">
+                <button type="button" class="btn btn-block bg-red waves-effect" onclick="removeAllFields();">
                     <span class="font-12">DELETAR TODOS</span>&nbsp;
                     <i class="material-icons">delete_forever</i>
                 </button>
             </div>
+            
         </div>
     </div>
+    {% comment %} <script>
+        function addNovaPessoa(i) {
+            var i = i;
+            var tbody = document.getElementById('listaPessoas');
+            tbody.innerHTML = '<tr id="trPessoa_"'+ i +'></tr>';
+
+            var tr = document.getElementById('trPessoa_'+i);
+            tr.innerHTML =
+                '<td>' +
+                    '<strong class="numMembro">' + (i+1) + 'º </strong>'+
+                '</td>' +
+                '<td>' +
+                    '<div class="form-group" style="margin-bottom: 0px;">' +
+                        '<div class="form-line">' +
+                            '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" />' +
+                        '</div>' +
+                    '</div>' +
+                '</td>' +
+                '<td>' +
+                    '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">' +
+                        '<i class="material-icons">delete</i>' +
+                    '</button>' +
+                '</td>'
+            return;
+        }
+    </script>{% endcomment %}
     <div id="containerPessoas" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; width: 92%;">
         
-    </div>
+    </div> 
     
 
 

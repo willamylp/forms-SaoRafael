@@ -43,32 +43,21 @@ $(function () {
     });
 });
 
-/*
+// $(function () {
+//     var numPessoas = $('#id_num_pessoas');
+    
+//     numPessoas.on('focusout', function () {
+//         numPessoas = $('#id_num_pessoas');
+//         numPessoas = parseInt(numPessoas.val());
+//         if (numPessoas < (parseInt(localStorage.getItem('id_num_pessoas'))) ){
+//             removeAllFields(parseInt(localStorage.getItem('id_num_pessoas')) );
+//         }
+//         else {
+//             removeAllFields(0);
+//         }
+//     });
+// });
 
-$(function () {
-    var numPessoas = $('#id_num_pessoas');
-    var tbody = $('#listaPessoas');
-
-    numPessoas.on('focusout', function () {
-        numPessoas = $('#id_num_pessoas');
-        numPessoas = parseInt(numPessoas.val());
-        if (numPessoas < (parseInt(localStorage.getItem('id_num_pessoas'))) ){
-            deleteAllRows(parseInt(localStorage.getItem('id_num_pessoas')) );
-        }
-        else {
-            deleteAllRows(0);
-        }
-        if (numPessoas > 0) {
-            for (i = 1; i <= numPessoas; i++) {
-                addNovaPessoa((numPessoas - i) + 1);
-            }
-        }
-        localStorage.setItem(
-            "id_num_pessoas", $('#id_num_pessoas').val()
-        );
-    });
-});
-*/
 function deleteAllRows(numPessoas) {
     if (numPessoas == 0) {
         numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
@@ -85,111 +74,156 @@ function deleteAllRows(numPessoas) {
     return;
 }
 
-/*function addRowPessoa() {
-    //var numPessoas = parseInt(document.getElementById('numPessoas').value)
-    var table = document.getElementById('tabelaPessoas');
-    var row = table.insertRow(2);
+// function addRowPessoa() {
+//     //var numPessoas = parseInt(document.getElementById('numPessoas').value)
+//     var table = document.getElementById('tabelaPessoas');
+//     var row = table.insertRow(2);
     
-    for (i = 0; i < numPessoas; i++) {
-        row.insertCell(0).innerHTML = "<strong> Membro" + i + "</strong>";
-        row.insertCell(1).innerHTML =
-            '<div class="form-group" style="margin-bottom: 0px;">\n' +
-                '<div class="form-line">\n' +
-                    '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
-                '</div>\n' +
-            '</div>\n';
-        row.insertCell(2).innerHTML =
-            '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
-               '<i class="material-icons"> delete</i>\n' +
-            '</button>\n';
-    }
-} */
+//     for (i = 0; i < numPessoas; i++) {
+//         row.insertCell(0).innerHTML = "<strong> Membro" + i + "</strong>";
+//         row.insertCell(1).innerHTML =
+//             '<div class="form-group" style="margin-bottom: 0px;">\n' +
+//                 '<div class="form-line">\n' +
+//                     '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
+//                 '</div>\n' +
+//             '</div>\n';
+//         row.insertCell(2).innerHTML =
+//             '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
+//                '<i class="material-icons"> delete</i>\n' +
+//             '</button>\n';
+//     }
+// } 
 function addFields() {
     // Number of inputs to create
     var num_pessoas = parseInt(document.getElementById("id_num_pessoas").value);
+    
     if ((num_pessoas != '') || (num_pessoas > 0 )) {
         // Container <div> where dynamic content will be placed
         var container = document.getElementById("containerPessoas");
+
         // Clear previous contents of the container
         while (container.hasChildNodes()) {
             container.removeChild(container.lastChild);
         }
         for (i = 0; i < num_pessoas; i++) {
-            // var div = document.createElement('div');
-            // div.classList = "col-md-1";
-            // container.appendChild(div);
-            // div = document.getElementById("div_" + i);
-
-
-
-            var div2 = document.createElement('div');
-            div2.classList  = "wrap-input100 col-md-12 col-indigo";
-            div2.id         = "div2_" + i;
-            div2.style      = "margin-bottom: 10px";
-            container.appendChild(div2);
-            div2 = document.getElementById('div2_'+i);         
+            var div = document.createElement('div');
+            div.classList  = "wrap-input100 col-md-10 col-indigo divPessoa";
+            div.id         = "div_" + i;
+            div.style      = "margin-bottom: 10px";
+            container.appendChild(div);
+            div = document.getElementById('div_'+i);         
 
             // Append a node with a random text
             //container.appendChild(document.createTextNode("id_num_pessoas " + (i + 1)));
             // Create an <input> element, set its type and name attributes
             var input = document.createElement("input");
+            //input = "{{ formResidente.nome_residente }}";
             input.type          = "text";
-            input.name          = "pessoa_" + i;
+            input.name          = "id_nome_residente_" + i;
             input.id            = "id_nome_residente_" + i;
             input.classList     = "input100 inputPessoa m-l-10";
-            input.placeholder   = (i+1) + "º - Inserir Nome Completo";
+            input.placeholder   = "Inserir Nome Completo";
             input.required      = 'true';
             input.style         = 'height: 40px;';
-            div2.appendChild(input);
+            div.appendChild(input);
 
             /* Criando Elemento <span> */
             var span = document.createElement('span');
             span.classList = "focus-input100";
-            div2.appendChild(span);
+            div.appendChild(span);
 
             /* Criando Elemento <label> */
             var label = document.createElement('label');
             label.classList = "label-input100";
             label.for = "id_nome_residente_" + i;
             label.id = "label_" + i;
-            div2.appendChild(label);
+            div.appendChild(label);
 
             label = document.getElementById("label_" + i);
             label.innerHTML = '<i class="material-icons col-indigo">person</i>';
             
+            /* Criando Elemento Div Button */
+            var divButton = document.createElement("div");
+            divButton.classList = "col-md-2";
+            divButton.style = "margin-bottom: 0;"
+            divButton.id = "divButton_" + i;
+            container.appendChild(divButton);
+            divButton = document.getElementById('divButton_' + i);
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.classList = "btn btn-block bg-red waves-effect btnDelete";
+            button.id = "id_btn_" + i;
+            //button.onclick = "removeField('"+i+"');";
+            divButton.appendChild(button);
+
+            button = document.getElementById("id_btn_" + i);
+            button.innerHTML = '<i class="material-icons col-indigo">delete</i>'
+            
             // Append a line break 
             //container.appendChild(document.createElement("br"));
         }
+        
     }
     else {
         return;
     }
 }
-function addNovaPessoa(i) {
-    var i = i;
-    var tbody = document.getElementById('listaPessoas');
-    tbody.innerHTML = '<tr id="trPessoa_"'+ i +'></tr>';
 
-    var tr = document.getElementById('trPessoa_'+i);
-    tr.innerHTML =
-        '<td>' +
-            '<strong class="numMembro">' + (i+1) + 'º </strong>'+
-        '</td>' +
-        '<td>' +
-            '<div class="form-group" style="margin-bottom: 0px;">' +
-                '<div class="form-line">' +
-                    '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" />' +
-                '</div>' +
-            '</div>' +
-        '</td>' +
-        '<td>' +
-            '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">' +
-                '<i class="material-icons">delete</i>' +
-            '</button>' +
-        '</td>'
-
-    return;
+function removeAllFields() {
+    var numPessoas = document.getElementsByClassName('divPessoa').length;
+    if ((numPessoas != '') || (numPessoas > 0)) {
+        for(i = 0; i < numPessoas; i++) {
+            removeField(i);
+        }
+        localStorage.removeItem('id_num_pessoas');
+        document.getElementById('id_num_pessoas').value = 0;
+    }
 }
+
+function removeField(num) {
+    var div = document.getElementById("div_" + num);
+    var divBtn = document.getElementById("divButton_" + num);
+    var btn = document.getElementById("id_btn_" + num);
+
+    btn.parentNode.removeChild(btn);
+    divBtn.parentNode.removeChild(divBtn);
+    div.parentNode.removeChild(div);
+    
+    var numPessoas = document.getElementById('id_num_pessoas');
+
+    localStorage.setItem(
+        'id_num_pessoas', (localStorage.getItem('id_num_pessoas') - 1)
+    );
+
+    numPessoas.value = (parseInt(numPessoas.value)) - 1;
+}
+
+// function addNovaPessoa(i) {
+//     var i = i;
+//     var tbody = document.getElementById('listaPessoas');
+//     tbody.innerHTML = '<tr id="trPessoa_"'+ i +'></tr>';
+
+//     var tr = document.getElementById('trPessoa_'+i);
+//     tr.innerHTML =
+//         '<td>' +
+//             '<strong class="numMembro">' + (i+1) + 'º </strong>'+
+//         '</td>' +
+//         '<td>' +
+//             '<div class="form-group" style="margin-bottom: 0px;">' +
+//                 '<div class="form-line">' +
+//                     '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" />' +
+//                 '</div>' +
+//             '</div>' +
+//         '</td>' +
+//         '<td>' +
+//             '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">' +
+//                 '<i class="material-icons">delete</i>' +
+//             '</button>' +
+//         '</td>'
+
+//     return;
+// }
 
 function corrigeIDsNumPessoas() {
     var numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
