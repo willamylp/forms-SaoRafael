@@ -1,0 +1,51 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+{% include './headListTermo.html' %}
+
+<body class="theme-blue">
+    
+    {% include '../page_loader.html' %}
+
+    <div class="overlay"></div>
+
+    {% include '../top_bar.html' %}
+
+    <section class="content">
+		{% include './breadcrumb.html' %}
+	    
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="header bg-indigo" align="center">
+                            <h2>LISTAGEM DOS TERMOS DE ISOLAMENTO</h2>
+                        </div>
+                        <div class="body">
+
+                            <!-- LISTAGEM -->
+                            
+                            {% include './content.html' %}
+
+                            <!-- END LISTAGEM -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        {% include '../footer.html' %}
+    </section>
+    
+    <!-- #Modal -->
+    {% include '../modal_info_sistema.html' %}
+    <!-- FIM DO MODAL -->
+
+    {% include './scriptsListTermo.html' %}
+
+</body>
+</html>

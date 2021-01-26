@@ -1,48 +1,71 @@
-{% load static %}
-
-
-<!DOCTYPE html>
-<html>
-
-{% include './head.html' %}
-
-<body class="theme-blue">
-    
-    {% include '../page_loader.html' %}
-
-    <div class="overlay"></div>
-
-    {% include '../top_bar.html' %}
-
-    <section class="content">
-		{% include './breadcrumb.html' %}
-	    
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12">
-                    <div class="card">
-                        <div class="body">
-
-                            <!-- FORM -->
-                            
-                            {% include './form.html' %}
-
-                            <!-- END FORM -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- FOOTER -->
-        {% include '../footer.html' %}
-    </section>
-    
-    <!-- #Modal -->
-    {% include '../modal_info_sistema.html' %}
-    <!-- FIM DO MODAL -->
-
-    {% include './scripts.html' %}
-
-</body>
-</html>
+<div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+        {% if pacientes|length == 0 %}
+        <br>
+        <h2 style="color: red; text-align: center;">NÃO HÁ REGISTROS!</h2><br>
+        {% else %}
+        
+        <h4 style="color: #17a2b8; text-align: center;">
+            <i class="material-icons">info</i>
+            <span>Clique no título da coluna para ordenar</span>
+        </h4>
+        <h4 style="margin-bottom: -5px; color: #444444;">Exportar Registros</h4>
+        <thead>
+            <tr>
+                <th>NOME DO PACIENTE</th>
+                <th>CNS / CPF</th>
+                <th>DT. NASCIM.</th>
+                <th>1º SINTOMAS</th>
+                <th>TELEFONE</th>
+            </tr>
+        </thead>
+        {% comment %} 
+        <tfoot>
+            <tr>
+                <th>NOME DO PACIENTE</th>
+                <th>CNS / CPF</th>
+                <th>DT. NASCIM.</th>
+                <th>1º SINTOMAS</th>
+                <th>TELEFONE</th>
+            </tr>
+        </tfoot>
+        {% endcomment %}
+        <tbody>
+            {% for paciente in pacientes %}
+            <tr>
+                <td>
+                    <strong>{{ paciente.nome_paciente }}</strong>
+                </td>
+                <td> 
+                    {% if  paciente.semCPF == False %} 
+                        {{paciente.cpf}} 
+                    {% else %} 
+                        {{paciente.cns}} 
+                    {% endif %}
+                </td>
+                <td>{{ paciente.dt_nascimento }}</td>
+                <td>{{ paciente.dt_1_sintomas }}</td>
+                <td>{{ paciente.telefone }}</td>
+                <td>
+                    <center>
+                        <a href="{% url 'AtualizarTermo' paciente.id %}">
+                            <button type="button" class="btn bg-cyan waves-effect">
+                                <i class="material-icons">mode_edit</i>
+                            </button>
+                        </a>
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        <button type="button" class="btn bg-red waves-effect" onClick="ConfirmarDelete({{ paciente.id }})">
+                            <i class="material-icons">delete_forever</i>
+                        </button>
+                    </center>
+                </td>
+            </tr>
+            {% endfor %}
+            <br>
+        </tbody>
+        {% endif %}
+    </table>
+</div>

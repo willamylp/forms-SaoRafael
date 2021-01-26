@@ -46,7 +46,7 @@ def RegistroTermo(request):
                         ),
                         nome_residente=request.POST['id_nome_residente_{}'.format(i)]
                     ).save()
-                elif(request.POST['cns'] != ''):
+                elif(request.POST['cns'] != None):
                     Residente.objects.create(
                         paciente=Paciente.objects.get(
                             pk=Paciente.objects.filter(cns=request.POST['cns'])[:1]
@@ -64,7 +64,7 @@ def ListarTermos(request):
     return render(request, 'listagemTermos/ListarTermos.html', {'pacientes': pacientes})
 
 @login_required
-def AtualizarTermo(request):
+def AtualizarTermo(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
     listaSintomas = list(Paciente.sintomas)
     listaCondicoes = list(Paciente.condicoes)
