@@ -43,56 +43,6 @@ $(function () {
     });
 });
 
-// $(function () {
-//     var numPessoas = $('#id_num_pessoas');
-    
-//     numPessoas.on('focusout', function () {
-//         numPessoas = $('#id_num_pessoas');
-//         numPessoas = parseInt(numPessoas.val());
-//         if (numPessoas < (parseInt(localStorage.getItem('id_num_pessoas'))) ){
-//             removeAllFields(parseInt(localStorage.getItem('id_num_pessoas')) );
-//         }
-//         else {
-//             removeAllFields(0);
-//         }
-//     });
-// });
-
-function deleteAllRows(numPessoas) {
-    if (numPessoas == 0) {
-        numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
-    }
-    else if (numPessoas == 'x') {
-        numPessoas = document.getElementsByClassName('numMembro').length;
-        for (i = 1; i <= numPessoas; i++) {
-            let id = '#id_nome_residente_' + i;
-            $(id).closest("tr").remove();
-        }
-        localStorage.removeItem('id_num_pessoas');
-        document.getElementById('id_num_pessoas').value = 0;
-    }
-    return;
-}
-
-// function addRowPessoa() {
-//     //var numPessoas = parseInt(document.getElementById('numPessoas').value)
-//     var table = document.getElementById('tabelaPessoas');
-//     var row = table.insertRow(2);
-    
-//     for (i = 0; i < numPessoas; i++) {
-//         row.insertCell(0).innerHTML = "<strong> Membro" + i + "</strong>";
-//         row.insertCell(1).innerHTML =
-//             '<div class="form-group" style="margin-bottom: 0px;">\n' +
-//                 '<div class="form-line">\n' +
-//                     '<input type="text" class="form-control bg-col-t" placeholder="Inserir Nome Completo" required id="nome_residente_' + i + '" /> \n' +
-//                 '</div>\n' +
-//             '</div>\n';
-//         row.insertCell(2).innerHTML =
-//             '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">\n' +
-//                '<i class="material-icons"> delete</i>\n' +
-//             '</button>\n';
-//     }
-// } 
 function addFields() {
     // Number of inputs to create
     var num_pessoas = parseInt(document.getElementById("id_num_pessoas").value);
@@ -111,7 +61,7 @@ function addFields() {
             div.id         = "div_" + i;
             div.style      = "margin-bottom: 10px";
             container.appendChild(div);
-            div = document.getElementById('div_'+i);         
+            div = document.getElementById('div_'+i);
 
             // Append a node with a random text
             //container.appendChild(document.createTextNode("id_num_pessoas " + (i + 1)));
@@ -144,7 +94,7 @@ function addFields() {
             
             /* Criando Elemento Div Button */
             var divButton = document.createElement("div");
-            divButton.classList = "col-md-2";
+            divButton.classList = "col-md-2 divButton";
             divButton.style = "margin-bottom: 0;"
             divButton.id = "divButton_" + i;
             container.appendChild(divButton);
@@ -154,8 +104,8 @@ function addFields() {
             button.type = "button";
             button.classList = "btn btn-block bg-red waves-effect btnDelete";
             button.id = "id_btn_" + i;
-            //button.onclick = "removeField('"+i+"');";
             divButton.appendChild(button);
+            document.getElementById('id_btn_'+i).setAttribute('onclick', 'removeField('+i+')');
 
             button = document.getElementById("id_btn_" + i);
             button.innerHTML = '<i class="material-icons col-indigo">delete</i>'
@@ -169,7 +119,6 @@ function addFields() {
         return;
     }
 }
-
 function removeAllFields() {
     var numPessoas = document.getElementsByClassName('divPessoa').length;
     if ((numPessoas != '') || (numPessoas > 0)) {
@@ -180,7 +129,6 @@ function removeAllFields() {
         document.getElementById('id_num_pessoas').value = 0;
     }
 }
-
 function removeField(num) {
     var div = document.getElementById("div_" + num);
     var divBtn = document.getElementById("divButton_" + num);
@@ -197,63 +145,26 @@ function removeField(num) {
     );
 
     numPessoas.value = (parseInt(numPessoas.value)) - 1;
+    if(numPessoas.value > 0) {
+        corrigeIDsInputsPessoas();
+    }
 }
-
-// function addNovaPessoa(i) {
-//     var i = i;
-//     var tbody = document.getElementById('listaPessoas');
-//     tbody.innerHTML = '<tr id="trPessoa_"'+ i +'></tr>';
-
-//     var tr = document.getElementById('trPessoa_'+i);
-//     tr.innerHTML =
-//         '<td>' +
-//             '<strong class="numMembro">' + (i+1) + 'º </strong>'+
-//         '</td>' +
-//         '<td>' +
-//             '<div class="form-group" style="margin-bottom: 0px;">' +
-//                 '<div class="form-line">' +
-//                     '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" />' +
-//                 '</div>' +
-//             '</div>' +
-//         '</td>' +
-//         '<td>' +
-//             '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">' +
-//                 '<i class="material-icons">delete</i>' +
-//             '</button>' +
-//         '</td>'
-
-//     return;
-// }
-
-function corrigeIDsNumPessoas() {
+function corrigeIDsInputsPessoas() {
     var numPessoas = parseInt(document.getElementById('id_num_pessoas').value);
-    var numMembros = document.getElementsByClassName('numMembro');
+    var divsPessoas = document.getElementsByClassName('divPessoa');
+    var divsButtons = document.getElementsByClassName('divButton');
+    var buttonsDelete = document.getElementsByClassName('btnDelete');
     var inputsPessoas = document.getElementsByClassName('inputPessoa');
 
     for (i = 0; i < numPessoas; i++) {
-        numMembros[i].innerText = (i + 1) + "º";
-        inputsPessoas[i].id = "id_nome_residente_" + (i + 1);
+        divsPessoas[i].id = "div_" + i;
+        divsButtons[i].id = "divButton_" + i;
+        inputsPessoas[i].id = "id_nome_residente_" + i;
+        inputsPessoas[i].name = "id_nome_residente_" + i;
+        buttonsDelete[i].id = "id_btn_" + i;
+        document.getElementById('id_btn_' + i).setAttribute('onclick', 'removeField(' + i + ')');
     }
     return;
-}
-
-function deleteCell(btndel) {
-    if (typeof (btndel) == "object") {
-        $(btndel).closest("tr").remove();
-
-        localStorage.setItem(
-            'id_num_pessoas', (localStorage.getItem('id_num_pessoas') - 1)
-        );
-
-        var numPessoas = document.getElementById('id_num_pessoas');
-        numPessoas.value = (parseInt(numPessoas.value)) - 1;
-        
-        if (parseInt(numPessoas.value) > 0) {
-            corrigeIDsNumPessoas();
-        }
-    }
-    return;
-    
 }
 
 function noCPF() {

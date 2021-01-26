@@ -51,8 +51,7 @@ def RegistroTermo(request):
                         paciente=Paciente.objects.get(
                             pk=Paciente.objects.filter(cns=request.POST['cns'])[:1]
                         ),
-                        nome_residente=request.POST['id_nome_residente_{}'.format(
-                            i)]
+                        nome_residente=request.POST['id_nome_residente_{}'.format(i)]
                     ).save()
         
         messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
