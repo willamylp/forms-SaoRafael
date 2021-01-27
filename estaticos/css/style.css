@@ -7485,7 +7485,7 @@ fieldset[disabled] .form-control {
     .dropdown-menu .footer a:hover {
       background-color: transparent; }
   .dropdown-menu > li > a {
-    padding: 7px 18px;
+    padding: 7px;
     color: #666;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
@@ -8142,11 +8142,11 @@ fieldset[disabled] .form-control {
     font-size: 12px;
     border-bottom: 1px solid #ddd; }
     .dataTables_wrapper input[type="search"]:focus, .dataTables_wrapper input[type="search"]:active {
-      border-bottom: 2px solid #008080; }
+      border-bottom: 2px solid #2196f3; }
   .dataTables_wrapper .dt-buttons {
     float: left; }
     .dataTables_wrapper .dt-buttons a.dt-button {
-      background-color: #008080;
+      background-color: #2196f3;
       color: #fff;
       padding: 7px 12px;
       margin-right: 5px;

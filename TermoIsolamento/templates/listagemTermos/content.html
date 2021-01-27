@@ -1,5 +1,5 @@
-<div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+<div class="table-responsive" style="min-height: 400px;">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
         {% if pacientes|length == 0 %}
         <br>
         <h2 style="color: red; text-align: center;">NÃO HÁ REGISTROS!</h2><br>
@@ -10,7 +10,7 @@
                                     <span>NOVO REGISTRO</span>
                                 </button> 
                             </a>
-        <h4 style="color: #17a2b8; text-align: center;">
+        <h4 style="text-align: center;" class="col-blue">
             <i class="material-icons">info</i>
             <span>Clique no título da coluna para ordenar</span>
         </h4>
@@ -23,7 +23,7 @@
                 <th>DT. NASCIM.</th>
                 <th>1º SINTOMAS</th>
                 <th>TELEFONE</th>
-                <th>BOTÕES</th>
+                <th>OPÇÕES</th>
             </tr>
         </thead>
         {% comment %} 
@@ -55,20 +55,36 @@
                 <td>{{ paciente.dt_1_sintomas }}</td>
                 <td>{{ paciente.telefone }}</td>
                 <td>
-                    <center>
-                        <button type="button" class="btn bg-indigo waves-effect" onClick="#">
-                            <i class="material-icons">print</i>
-                        </button>
-                        
-                        <a href="{% url 'AtualizarTermo' paciente.id %}">
-                            <button type="button" class="btn bg-blue waves-effect">
-                                <i class="material-icons">mode_edit</i>
+                    <div class="btn-group-vertical m-r-20" role="group" aria-label="Vertical button group">
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupVerticalDrop1" type="button" class="btn bg-indigo waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                OPERAÇÕES <span class="caret"></span>
                             </button>
-                        </a>
-                        <button type="button" class="btn bg-red waves-effect" onClick="ConfirmarDelete({{ paciente.id }})">
-                            <i class="material-icons">delete_forever</i>
-                        </button>
-                    </center>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                                <li>
+                                    <a class="col-blue waves-effect" href="#">
+                                        <i class="material-icons">info</i> INFORMAÇÕES
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="col-indigo waves-effect" href="{% url 'AtualizarTermo' paciente.id %}">
+                                        <i class="material-icons">mode_edit</i> EDITAR
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="col-black waves-effect" onClick="#">
+                                        <i class="material-icons">print</i> IMPRIMIR
+                                    </a>
+                                </li>
+                                <li>
+                                    {% comment %} <a href="javascript:void(0);">Dropdown link</a> {% endcomment %}
+                                    <a class="col-red waves-effect" onClick="ConfirmarDelete({{ paciente.id }})">
+                                        <i class="material-icons">delete_forever</i> DELETAR
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>                        
+                    </div>
                 </td>
             </tr>
             {% endfor %}
