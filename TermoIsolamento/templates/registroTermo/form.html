@@ -2,7 +2,6 @@
 
 <form class="contact100-form" method="POST" id="form">
     {% csrf_token %}
-
     <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
 		<div class="wrap-input100 validate-input col-md-6">
 			{{ formPaciente.nome_paciente|add_class:'input100'|attr:"placeholder:Nome Completo do Paciente" }}
@@ -46,7 +45,11 @@
         <!-- =========== -->
         <div class="wrap-input100 validate-input col-md-4">
             <em class="col-indigo">Data dos <strong>1º Sintomas</strong>:</em>
-            {{ formPaciente.dt_1_sintomas|add_class:'input100'|attr:"type:date"}}
+            {% if 'AtualizarTermo' in request.path %}
+                {{ formPaciente.dt_1_sintomas|add_class:'input100'|attr:"type:text" }}
+            {% else %}
+                {{ formPaciente.dt_1_sintomas|add_class:'input100'|attr:"type:date"}}
+            {% endif %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_1_sintomas">
                 <i class="material-icons col-indigo m-t-20">today</i>
@@ -54,7 +57,11 @@
         </div>
         <div class="wrap-input100 validate-input col-md-4 m-l-5">
             <em class="col-indigo"><strong>Início do Isolamento:</strong></em>
-            {{ formPaciente.dt_ini_isolamento|add_class:'input100'|attr:"type:date"}}
+            {% if 'AtualizarTermo' in request.path %}
+                {{ formPaciente.dt_ini_isolamento|add_class:'input100'|attr:"type:text" }}
+            {% else %}
+                {{ formPaciente.dt_ini_isolamento|add_class:'input100'|attr:"type:date"}}
+            {% endif %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_ini_isolamento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
@@ -115,7 +122,11 @@
 
         <div class="wrap-input100 validate-input col-md-4">
             <em class="col-indigo not-allowed"><strong>Data de Nascimento</strong>:</em>
-            {{ formPaciente.dt_nascimento|add_class:'input100'|attr:"type:date"}}
+            {% if 'AtualizarTermo' in request.path %}
+                {{ formPaciente.dt_nascimento|add_class:'input100'|attr:"type:text"}}
+            {% else %}
+                {{ formPaciente.dt_nascimento|add_class:'input100'|attr:"type:date"}}
+            {% endif %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_dt_nascimento">
                 <i class="material-icons col-indigo m-t-20">date_range</i>
@@ -291,34 +302,22 @@
             
         </div>
     </div>
-    {% comment %} <script>
-        function addNovaPessoa(i) {
-            var i = i;
-            var tbody = document.getElementById('listaPessoas');
-            tbody.innerHTML = '<tr id="trPessoa_"'+ i +'></tr>';
 
-            var tr = document.getElementById('trPessoa_'+i);
-            tr.innerHTML =
-                '<td>' +
-                    '<strong class="numMembro">' + (i+1) + 'º </strong>'+
-                '</td>' +
-                '<td>' +
-                    '<div class="form-group" style="margin-bottom: 0px;">' +
-                        '<div class="form-line">' +
-                            '<input type="text" class="form-control bg-col-t inputPessoa" placeholder="Inserir Nome Completo" required id="id_nome_residente_' + i + '" />' +
-                        '</div>' +
-                    '</div>' +
-                '</td>' +
-                '<td>' +
-                    '<button type="button" class="btn bg-red waves-effect" onclick="deleteCell(this);">' +
-                        '<i class="material-icons">delete</i>' +
-                    '</button>' +
-                '</td>'
-            return;
-        }
-    </script>{% endcomment %}
     <div id="containerPessoas" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; width: 92%;">
-        
+        {% if "AtualizarTermo" in request.path %}
+            {% for rst in residentes %}
+                <div class="wrap-input100 col-md-10 col-indigo divPessoa" id="div_{{forloop.counter0}}" style="margin-bottom: 10px">
+                    <input id="id_nome_residente_{{forloop.counter0}}"name="id_nome_residente_{{forloop.counter0}}" class="input100 inputPessoa m-l-10" value="{{ residentes.0 }} " style="height: 40px;"/>
+                    <span class="focus-input100"></span>
+                    <label class="label-input100" for="id_nome_residente_{{forloop.counter0}}">
+                        <i class="material-icons col-indigo">person</i>
+                    </label>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div id="containerPessoas" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; width: 92%;">
+            </div>
+        {% endif %}
     </div> 
     
 

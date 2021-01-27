@@ -29,24 +29,21 @@ def generateLogs(request, form):
 def RegistroTermo(request):
     formPaciente = PacienteForm(request.POST or None)
     formResidente = ResidenteForm(request.POST or None)
-    generateLogs(request, formPaciente)
+    #generateLogs(request, formPaciente)
 
-    #print("\n>>>>>", request.POST)
-    #formResidente = Residente(request.POST or None)
     if(formPaciente.is_valid()):
         formPaciente.save()
-        #print("\n>>>>>", request.POST)
         if((request.POST['num_pessoas'] != None) or (int(request.POST['num_pessoas']) > 0)):
-            print('>>>>>>>>>>>>>> ', request.POST['id_nome_residente_0'])
+            #print('>>>>>>>>>>>>>> ', request.POST['id_nome_residente_0'])
             for i in range(int(request.POST['num_pessoas'])):
-                if(request.POST['cpf'] != None):
+                if(request.POST.get('cpf', None) != None):
                     Residente.objects.create(
                         paciente=Paciente.objects.get(
                             pk=Paciente.objects.filter(cpf=request.POST['cpf'])[:1]
                         ),
                         nome_residente=request.POST['id_nome_residente_{}'.format(i)]
                     ).save()
-                elif(request.POST['cns'] != None):
+                elif(request.POST.get('cns', None) != None):
                     Residente.objects.create(
                         paciente=Paciente.objects.get(
                             pk=Paciente.objects.filter(cns=request.POST['cns'])[:1]
@@ -65,17 +62,29 @@ def ListarTermos(request):
 
 @login_required
 def AtualizarTermo(request, id):
-    paciente = get_object_or_404(Paciente, pk=id)
-    listaSintomas = list(Paciente.sintomas)
-    listaCondicoes = list(Paciente.condicoes)
-    form = PacienteForm(request.POST or None, instance=paciente)
-    if(form.is_valid()):
-        form.save()
+    pct = get_object_or_404(Paciente, pk=id)
+    residentes = Residente.objects.filter(paciente_id=id)
+    #print('>>>>>', residentes[0].id)
+    #print('>>>>>', len(residentes))
+    listaSintomas = list(pct.sintomas)
+    listaCondicoes = list(pct.condicoes)
+    formPaciente = PacienteForm(request.POST or None, instance=pct)
+    
+    if(formPaciente.is_valid()):
+        formPaciente.save()
+        if(int(pct.num_pessoas) > 0):
+            for i in range(int(pct.num_pessoas)):
+                pass            
+        else:
+            for i in range(len(residentes)):
+                residentes[i].delete()
+        messages.success(request, 'Termo de Isolamento Atualizado com Sucesso!')     
         return redirect('../../ListarTermos')
     return render(
         request,
-        'listagemTermos/ListarTermos.html', {
-            'paciente': paciente,
+        'registroTermo/content.html', {
+            'formPaciente': formPaciente,
+            'residente': residentes,
             'listSintomas': listaSintomas,
             'listCondicoes': listaCondicoes
         }

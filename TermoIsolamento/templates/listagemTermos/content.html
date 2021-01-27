@@ -1,15 +1,24 @@
+
+
 <div class="table-responsive" style="min-height: 400px;">
     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
         {% if pacientes|length == 0 %}
         <br>
+        <a href="../RegistrarTermo" style="float: right;">
+            <button type="button" class="btn bg-indigo waves-effect linkTextBold">
+                <i class="material-icons">add</i>
+                <span>NOVO REGISTRO</span>
+            </button> 
+        </a>
+        <br><br><br><br><br>
         <h2 style="color: red; text-align: center;">NÃO HÁ REGISTROS!</h2><br>
         {% else %}
         <a href="../RegistrarTermo" style="float: right;">
-                                <button type="button" class="btn bg-indigo waves-effect linkTextBold">
-                                    <i class="material-icons">add</i>
-                                    <span>NOVO REGISTRO</span>
-                                </button> 
-                            </a>
+            <button type="button" class="btn bg-indigo waves-effect linkTextBold">
+                <i class="material-icons">add</i>
+                <span>NOVO REGISTRO</span>
+            </button> 
+        </a>
         <h4 style="text-align: center;" class="col-blue">
             <i class="material-icons">info</i>
             <span>Clique no título da coluna para ordenar</span>
@@ -23,7 +32,7 @@
                 <th>DT. NASCIM.</th>
                 <th>1º SINTOMAS</th>
                 <th>TELEFONE</th>
-                <th>OPÇÕES</th>
+                <th>BOTÕES</th>
             </tr>
         </thead>
         {% comment %} 
@@ -51,9 +60,9 @@
                         {{paciente.cns}} 
                     {% endif %}
                 </td>
-                <td>{{ paciente.dt_nascimento }}</td>
-                <td>{{ paciente.dt_1_sintomas }}</td>
-                <td>{{ paciente.telefone }}</td>
+                <td>{{ paciente.dt_nascimento|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ paciente.dt_1_sintomas|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>({{ paciente.telefone }}</td>
                 <td>
                     <div class="btn-group-vertical m-r-20" role="group" aria-label="Vertical button group">
                         <div class="btn-group" role="group">
@@ -76,8 +85,8 @@
                                         <i class="material-icons">print</i> IMPRIMIR
                                     </a>
                                 </li>
+                                <li role="separator" class="divider"></li>
                                 <li>
-                                    {% comment %} <a href="javascript:void(0);">Dropdown link</a> {% endcomment %}
                                     <a class="col-red waves-effect" onClick="ConfirmarDelete({{ paciente.id }})">
                                         <i class="material-icons">delete_forever</i> DELETAR
                                     </a>

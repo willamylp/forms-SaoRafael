@@ -331,8 +331,15 @@ function DiffDates(dateIni, dateFim) {
 
 // CALCULA DATA TÉRMINO
 $(function () {
-    var dataInicio = $('#id_dt_ini_isolamento');
     var dataSintomas = $('#id_dt_1_sintomas');
+    var dataInicio = $('#id_dt_ini_isolamento');
+    if (dataSintomas.val().match('/')) {
+        let dtSintomas = dataSintomas.val().split('/');
+        let dtInicio = dataInicio.val().split('/');
+        
+        dataSintomas = dtSintomas[2] + '-' + dtSintomas[1] + '-' + dtSintomas[0];
+        dataInicio = dtInicio[2] + '-' + dtInicio[1] + '-' + dtInicio[0];
+    }
 
     dataInicio.on('focusout', function () {
         var dataIni = new Date(dataInicio.val());
