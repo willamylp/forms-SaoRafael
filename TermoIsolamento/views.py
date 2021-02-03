@@ -53,12 +53,34 @@ def RegistroTermo(request):
         
         messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
         return redirect('../ListarTermos')
-    return render(request, 'registroTermo/content.html', {'formPaciente': formPaciente, 'formResidente': formResidente})
+    return render(
+        request, 'registroTermo/content.html', {
+            'formPaciente': formPaciente, 
+            'formResidente': formResidente
+        }
+    )
 
 @login_required
 def ListarTermos(request):
     pacientes = Paciente.objects.all().values()
     return render(request, 'listagemTermos/ListarTermos.html', {'pacientes': pacientes})
+
+@login_required
+def VerInformacoes(request, id):
+    paciente = get_object_or_404(Paciente, pk=id)
+    residentes = Residente.objects.filter(paciente_id=id).values()
+    #residentes = list(residentes)
+    
+
+    print('P >>>', paciente)
+    print('R >>>', residentes)
+    return render(
+        request,
+        'verInformacoes/informacoes.html', {
+            'paciente': paciente,
+            'residente': residentes
+        }
+    )
 
 @login_required
 def AtualizarTermo(request, id):
@@ -74,7 +96,7 @@ def AtualizarTermo(request, id):
         formPaciente.save()
         if(int(pct.num_pessoas) > 0):
             for i in range(int(pct.num_pessoas)):
-                pass            
+                pass
         else:
             for i in range(len(residentes)):
                 residentes[i].delete()
