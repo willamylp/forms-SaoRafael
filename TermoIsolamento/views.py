@@ -75,7 +75,7 @@ def VerInformacoes(request, id):
 
     return render(
         request,
-        'verInformacoes/informacoes.html', {
+        'verInformacoes/VerInformacoes.html', {
             'paciente': paciente,
             'residentes': residentes
         }
