@@ -1,7 +1,9 @@
+import json 
 from django.shortcuts import render
 from .forms import PacienteForm, ResidenteForm
 from .models import Paciente, Residente
 from Home.urls import home
+from django.core.serializers.json import DjangoJSONEncoder
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -68,17 +70,14 @@ def ListarTermos(request):
 @login_required
 def VerInformacoes(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
-    residentes = Residente.objects.filter(paciente_id=id).values()
-    #residentes = list(residentes)
-    
+    residentes = Residente.objects.filter(paciente_id=id).values()  
+    json.dumps(list(residentes), cls=DjangoJSONEncoder)
 
-    print('P >>>', paciente)
-    print('R >>>', residentes)
     return render(
         request,
         'verInformacoes/informacoes.html', {
             'paciente': paciente,
-            'residente': residentes
+            'residentes': residentes
         }
     )
 

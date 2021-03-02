@@ -1,13 +1,10 @@
 
 <h1> {{ paciente.nome_paciente }} </h1>
-
-<h2> {{ residente.0 }} </h2>
-<h2> {{ residente.1 }} </h2>
-<h2> {{ residente.2 }} </h2>
+<h1> {{ residente.nome_residente }} </h1>
 
 
-{% for x in residente|length %}
-    <h2> {{ residente.x }} </h2>
+{% for residente in residentes %}
+    <h2> {{ residente.nome_residente }} </h2>
 {% endfor %}
 
 <a href="../ListarTermos">VOLTAR</a>
