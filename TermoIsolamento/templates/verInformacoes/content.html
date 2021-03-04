@@ -26,6 +26,7 @@
 
 <div class="body">
     <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12"></div>
         <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
             <div class="col-md-4">
                 <strong class="col-indigo">NOME DO PACIENTE:</strong>
@@ -151,26 +152,43 @@
         <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
             <div class="col-md-6">
                 <strong class="col-indigo">SINTOMAS:</strong>
-                <h5>
-                    {{paciente.sintomas}}
-                    {% if paciente.outros_sintomas != None %}
-                    &rarr; {{ paciente.outros_sintomas }}
+                {% for sintoma in paciente.sintomas %}
+                    {% if sintoma != "Outros" %}
+                        <h5>
+                            <span class="col-indigo">{{ forloop.counter}}&rarr; </span> {{ sintoma }}
+                        </h5>
+                    {% else %}
+                        {% for outroSintoma in paciente.outros_sintomas|split:"," %}
+                            <h5>
+                                {% if forloop.last %}
+                                <span class="col-indigo">{{ paciente.sintomas|length|soma1 }}&rarr; </span> {{ outroSintoma }}
+                                {% else %}
+                                <span class="col-indigo">{{ forloop.parentloop.counter }}&rarr; </span> {{ outroSintoma }}
+                                {% endif %}
+                            </h5>
+                        {% endfor %}
                     {% endif %}
-                </h5>
+                {% endfor %}
             </div>
             <div class="col-md-6">
                 <strong class="col-indigo">CONDIÇÕES:</strong>
-                <h5>{{ paciente.condicoes}}</h5>
+                {% if paciente.condicoes == None %}
+                <h5><em>Não Informado!</em></h5>
+                {% else %}
+                {% for condicao in paciente.condicoes%}
+                <h5><span class="col-indigo">{{ forloop.counter}}&rarr; </span> {{ condicao }}</h5>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
-    
+       
         <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
             <div class="col-md-12">
                 <strong class="col-indigo">RESIDENTES NO MESMO ENDEREÇO:</strong>
             </div>
             {% for residente in residentes %}
             <div class="col-md-12" style="margin-bottom: 0px;">
-                <h5><span class="col-indigo">{{ forloop.counter }} &rarr;</span> {{ residente.nome_residente }}</h5>
+                <h5><span class="col-indigo">{{ forloop.counter }} &rarr; </span> {{ residente.nome_residente }}</h5>
             </div>    
             {% endfor %}
         </div>
