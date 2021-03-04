@@ -18,7 +18,20 @@
             <span>DELETAR</span>
         </button>
     </a>
-    <hr/> 
+    <hr/>
+{% else %}
+    <a href="{% url 'home' %}" target="_self">
+        <button class="btn btn-sm waves-effect bg-white col-indigo">
+            <i class="material-icons">home</i>
+            <span>INÍCIO</span>
+        </button>
+    </a>
+    <a href="{% url 'ListarTermos' %}" target="_self">
+        <button class="btn btn-sm waves-effect bg-cyan col-white">
+            <i class="material-icons">list</i>
+            <span>LISTAGEM</span>
+        </button>
+    </a>
 {% endif %}
 <form class="contact100-form" method="POST" id="form">
     {% csrf_token %}
