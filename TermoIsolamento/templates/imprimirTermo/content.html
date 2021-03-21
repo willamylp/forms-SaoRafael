@@ -1,0 +1,170 @@
+<div class="body">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12"></div>
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+            <div class="col-md-4">
+                <strong class="col-indigo">NOME DO PACIENTE:</strong>
+                <h5>{{ paciente.nome_paciente}}</h5>
+            </div>
+            <div class="col-md-2">
+                <strong class="col-indigo">CPF:</strong>
+                {% if paciente.cpf == None %}
+                <h5 class="col-red">
+                    <em>Não Informado</em>
+                </h5>
+                {% else %}
+                <h5>{{ paciente.cpf }}</h5>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">CNS:</strong>
+                {% if paciente.cns == None %}
+                <h5 class="col-red">
+                    <em>Não Informado</em>
+                </h5>
+                {% else %}
+                <h5>{{ paciente.cns }}</h5>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">DATA DE NASCIMENTO:</strong>
+                <h5>{{ paciente.dt_nascimento}}</h5>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+            <div class="col-md-4">
+                <strong class="col-indigo">PROFISSIONAL INFORMANTE:</strong>
+                <h5>{{ paciente.profis_informante}}</h5>
+            </div>
+            <div class="col-md-2">
+                <strong class="col-indigo">1º SINTOMAS: </strong>
+                <h5>{{ paciente.dt_1_sintomas}}</h5>
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">INÍCIO DO ISOLAMENTO:</strong>
+                <h5>{{ paciente.dt_ini_isolamento}}</h5>
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">TÉRMINO DO ISOLAMENTO:</strong>
+                <h5>{{ paciente.dt_fim_isolamento}}</h5>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+            <div class="col-md-4">
+                <strong class="col-indigo">ENDEREÇO:</strong>
+                <h5>{{ paciente.endereco}}</h5>
+            </div>
+            <div class="col-md-2">
+                <strong class="col-indigo">NÚMERO:</strong>
+                <h5>{{ paciente.num_endereco}}</h5>
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">COMPLEMENTO:</strong>
+                {% if paciente.complemento == None %}
+                <h5 class="col-red">
+                    <em>Não Informado</em>
+                </h5>
+                {% else %}
+                <h5>{{ paciente.complemento }}</h5>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">BAIRRO:</strong>
+                <h5>{{ paciente.bairro}}</h5>
+            </div>
+            <div class="col-md-6">
+                <strong class="col-indigo">PONTO DE REFERÊNCIA:</strong>
+                {% if paciente.ponto_referencia == None %}
+                <h5 class="col-red">
+                    <em>Não Informado</em>
+                </h5>
+                {% else %}
+                <h5>{{ paciente.ponto_referencia }}</h5>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">CONTATO:</strong>
+                <h5>({{ paciente.telefone}}</h5>
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">CONTATO 2:</strong>
+                {% if paciente.telefone2 == None %}
+                <h5 class="col-red">
+                    <em>Não Informado</em>
+                </h5>
+                {% else %}
+                <h5>{{ paciente.telefone2 }}</h5>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+            <div class="col-md-6">
+                <strong class="col-indigo">NOME DO ACS:</strong>
+                {% if paciente.nome_acs == None %}
+                <h5 class="col-red">
+                    <em>Não Informado</em>
+                </h5>
+                {% else %}
+                <h5>{{ paciente.nome_acs }}</h5>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <strong class="col-indigo">RESPONSÁVEL:</strong>
+                {% if paciente.responsavel_pct == "Paciente" %}
+                <h5>O Próprio Paciente</h5>
+                {% else %}
+                <h5>Responsável</h5>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                {% if paciente.grau_parentesco != None %}
+                <strong class="col-indigo">GRAU DE PARENTESCO:</strong>
+                <h5>{{ paciente.grau_parentesco }}</h5>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+            <div class="col-md-6">
+                <strong class="col-indigo">SINTOMAS:</strong>
+                {% for sintoma in paciente.sintomas %}
+                    {% if sintoma != "Outros" %}
+                        <h5>
+                            <span class="col-indigo">{{ forloop.counter}}&rarr; </span> {{ sintoma }}
+                        </h5>
+                    {% else %}
+                        {% for outroSintoma in paciente.outros_sintomas|split:"," %}
+                            <h5>
+                                {% if forloop.last %}
+                                <span class="col-indigo">{{ paciente.sintomas|length|soma1 }}&rarr; </span> {{ outroSintoma }}
+                                {% else %}
+                                <span class="col-indigo">{{ forloop.parentloop.counter }}&rarr; </span> {{ outroSintoma }}
+                                {% endif %}
+                            </h5>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <strong class="col-indigo">CONDIÇÕES:</strong>
+                {% if paciente.condicoes == None %}
+                <h5><em>Não Informado!</em></h5>
+                {% else %}
+                {% for condicao in paciente.condicoes%}
+                <h5><span class="col-indigo">{{ forloop.counter}}&rarr; </span> {{ condicao }}</h5>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+       
+        <div class="col-lg-12 col-md-12 col-sm-12 com-xs-12">
+            <div class="col-md-12">
+                <strong class="col-indigo">RESIDENTES NO MESMO ENDEREÇO:</strong>
+            </div>
+            {% for residente in residentes %}
+            <div class="col-md-12" style="margin-bottom: 0px;">
+                <h5><span class="col-indigo">{{ forloop.counter }} &rarr; </span> {{ residente.nome_residente }}</h5>
+            </div>    
+            {% endfor %}
+        </div>
+    </div>
+</div>

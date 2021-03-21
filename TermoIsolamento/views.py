@@ -82,6 +82,20 @@ def VerInformacoes(request, id):
     )
 
 @login_required
+def ImprimirTermo(request, id):
+    paciente = get_object_or_404(Paciente, pk=id)
+    residentes = Residente.objects.filter(paciente_id=id).values()
+    json.dumps(list(residentes), cls=DjangoJSONEncoder)
+
+    return render(
+        request,
+        'imprimirTermo/ImprimirTermo.html', {
+            'paciente': paciente,
+            'residentes': residentes
+        }
+    )
+
+@login_required
 def AtualizarTermo(request, id):
     pct = get_object_or_404(Paciente, pk=id)
     residentes = Residente.objects.filter(paciente_id=id)
@@ -110,7 +124,6 @@ def AtualizarTermo(request, id):
             'listCondicoes': listaCondicoes
         }
     )
-    #return render(request, 'registroTermo/content.html', {'form': form})
     
 @login_required
 def DeletarTermo(request, id):

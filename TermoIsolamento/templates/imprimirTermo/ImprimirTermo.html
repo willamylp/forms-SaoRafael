@@ -1,0 +1,26 @@
+{% load static %}
+{% load split %}
+{% load soma1 %}
+
+<!DOCTYPE html>
+<html>
+
+{% include './headPrintTermo.html' %}
+
+<body class="theme-blue">	    
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12">
+                <div class="card">
+                    <!-- INFORMAÕES -->
+                    {% include './content.html' %}
+                    <!-- FIM INFORMAÇÕES -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% include './scriptsPrintTermo.html' %}
+
+</body>
+</html>
