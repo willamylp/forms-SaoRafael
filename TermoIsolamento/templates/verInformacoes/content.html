@@ -4,7 +4,7 @@
         <span>VOLTAR</span>
     </button>
 </a>
-<a href="#" target="_self">
+<a href="{% url 'ImprimirTermo' paciente.id %}" target="_blank">
     <button class="btn btn-sm waves-effect bg-blue-grey col-white">
         <i class="material-icons">print</i>
         <span>IMPRIMIR</span>
@@ -172,7 +172,7 @@
             </div>
             <div class="col-md-6">
                 <strong class="col-indigo">CONDIÇÕES:</strong>
-                {% if paciente.condicoes == None %}
+                {% if paciente.condicoes|length == 0 %}
                 <h5><em>Não Informado!</em></h5>
                 {% else %}
                 {% for condicao in paciente.condicoes%}

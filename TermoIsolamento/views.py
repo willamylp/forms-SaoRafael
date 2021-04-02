@@ -52,9 +52,9 @@ def RegistroTermo(request):
                         ),
                         nome_residente=request.POST['id_nome_residente_{}'.format(i)]
                     ).save()
-        
-        messages.success(request, 'Termo de Isolamento Registrado com Sucesso!')
-        return redirect('../ListarTermos')
+        pct=Paciente.objects.filter(cpf=request.POST['cpf'])[:1].values()
+        return redirect('../ImprimirTermo/{}'.format(pct[0]['id']))
+        #return redirect('../ListarTermos')
     return render(
         request, 'registroTermo/content.html', {
             'formPaciente': formPaciente, 

@@ -8434,3 +8434,25 @@ a.linkTextBold:hover {
 .bg-col-t {
   background-color: transparent;
 }
+.areaImagem img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.areaImagem {
+  float: left;
+  margin-top: 10px;
+}
+.areaTexto {
+  text-align: center;
+}
+.areaTexto p{
+  
+  float: left;
+  margin-left: 10px;
+  margin-top: 15px;
+  font-family: Garamond;
+}
+
+
+

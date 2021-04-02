@@ -7,20 +7,106 @@
 
 {% include './headPrintTermo.html' %}
 
-<body class="theme-blue">	    
-    <div class="container-fluid">
-        <div class="row clearfix">
-            <div class="col-xs-12 col-sm-12">
-                <div class="card">
-                    <!-- INFORMAÕES -->
-                    {% include './content.html' %}
-                    <!-- FIM INFORMAÇÕES -->
-                </div>
-            </div>
-        </div>
+<body class="bodyImpressao" onload="window.focus(); window.setTimeout(window.print(), 3000);">
+    <div class="cabecalho">
+        <table width=100% border=0>
+            <tr align="center">
+                <td align="right"><img src="{% static 'images/brasao_sao_rafael.png' %}" width="101" height="80"></td>
+                <td>
+                    <div class="cabecalho-titulo">
+                        <p class="p1">ESTADO DO RIO GRANDE DO NORTE — RN</p>
+                        <p class="p2">PREFEITURA MUNICIPAL DE SÃO RAFAEL — PMSR</p>
+                        <p class="p3">SECRETARIA MUNICIPAL DE SAÚDE — SEMUS<p>
+                    </div>
+                    {% comment %} <div class="cabecalho-endereco">
+                        Rua: Praça Neuman Queiroz, 58 Vila Santa Isabel
+                        <p>CNPJ: 08.095.283/0002-95</p><p>Telefone: (84)3429-3801 - Fax: (84)3429-3801</p>
+                    </div> {% endcomment %}
+                </td>
+            <tr>
+        </table>
     </div>
-    
-    {% include './scriptsPrintTermo.html' %}
-
+    <hr>
+    <div align="center">    
+        <h4>TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO<br>PARA ISOLAMENTO SOCIAL/QUARENTENA</h4>
+    </div>
+    <hr>
+    <div class="conteudoImprimir">
+        <p>Eu <strong>{{ paciente.nome_paciente}}</strong>, CPF nº 
+        {% if paciente.cpf == None %} <em><b>(Não Informado!)</b></em> 
+        {% else %} <strong>{{ paciente.cpf }}</strong> {% endif %} e CNS nº 
+        {% if paciente.cns == None %} <strong><em>(Não Informado!)</em></strong>
+        {% else %} <strong> {{ paciente.cns}} </strong>{% endif %}, nascido em {{paciente.dt_nascimento|date:"SHORT_DATE_FORMAT" }}, declaro que fui devidamente informado(a) pelo(a) profissional {{ paciente.profis_informante }} sobre a necessidade de <strong>ISOLAMENTO</strong> a que devo ser submetido, com data de início <strong>{{ paciente.dt_ini_isolamento|date:"SHORT_DATE_FORMAT" }}</strong> e previsão de término na data <strong>{{ paciente.dt_fim_isolamento }}</strong>, sendo o local de cumprimento da medida o endereço {{ paciente.endereco }}, {{ paciente.num_endereco}}, 
+        {% if paciente.complemento == None %} no bairro {{ paciente.bairro }} 
+        {% else %} {{ paciente.complemento }}, no bairro {{ paciente.bairro}}{% endif %}, 
+        {% if paciente.ponto_referencia == None %} bem como as possíveis consequências da sua não realização.
+        {% else %} ponto de referência: {{paciente.ponto_referencia}}, bem como as possíveis consequências da sua não realização. {% endif %}</p>
+        <p><strong>&rarr; CONTATO:</strong> ({{ paciente.telefone}} 
+        {% if paciente.telefone2 == None %}, 
+        ACS: {% if paciente.nome_acs == None  %} <strong><em>(Não Informado!)</em></strong> {% else %} {{ paciente.nome_acs }} {% endif %}
+        {% else %} ou ({{paciente.telefone2 }}, ACS: {% if paciente.nome_acs == None  %} <strong><em>(Não Informado!)</em></strong> {% else %} {{ paciente.nome_acs }} {% endif %}
+        {% endif %}<br>
+        <strong>&rarr; RESPONSÁVEL PELO PACIENTE:</strong> 
+        {% if paciente.responsavel_pct == "Paciente" %} <em>O Próprio Paciente</em>
+        {% else %} <em>Outra Pessoa</em> <br><em>Assinatura do Responsável:</em> ____________________________________________ Grau de Parentesco: <u>{{ paciente.grau_parentesco }}</u>
+        {% endif %}<br>
+        <strong>&rarr; SINTOMAS:</strong>
+        {% for sintoma in paciente.sintomas %}
+            {% if sintoma != "Outros" %}
+                {% if forloop.last %} {{ sintoma }}
+                {% else %} {{ sintoma }},
+                {% endif %}
+            {% else %}
+                Outros:
+                {% for outroSintoma in paciente.outros_sintomas|split:"," %}
+                    {% if forloop.last %} {{ outroSintoma }}
+                    {% else %} {{ outroSintoma }},
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}<br>
+        {% if 'Assintomático' in paciente.sintomas %} {% else %}
+        <strong>&rarr; INÍCIO DOS SINTOMAS:</strong> {{paciente.dt_1_sintomas|date:"SHORT_DATE_FORMAT"}}<br>
+        {% endif %}
+        <strong>&rarr; CONDIÇÕES:</strong>
+        {% if paciente.condicoes|length == 0 %}
+            <strong><em>(Não Informado!)</em></strong>
+        {% else %}
+            {% for condicao in paciente.condicoes%}
+                {% if forloop.last %} {{ condicao }}
+                {% else %} {{ condicao }},
+                {% endif %}
+            {% endfor %}
+        {% endif %}</p>
+        <p>Expliquei, ao próprio paciente e/ou seu responsável, o funcionamento da medida de saúde pública que o paciente acima está sujeito, bem como sobre riscos do não atendimento. O paciente e/ou responsável, está (ão) em condições de compreender o que lhes foi informado.<br>
+        <strong>Abaixo, seguem as orientações a serem seguidas:</strong><br>
+        <strong>Principais condutas — Indicadas para casos suspeitos ou confirmados sem necessidade de internação.</strong><br>
+        <strong>No isolamento domiciliar o indivíduo deve:</strong>
+        <ol class="listaOrientacoes">
+            <li>Permanecer em isolamento domiciliar (em casa) durante 14 dias (a partir da data de início de sintomas).</li>
+            <li>Manter distância dos demais familiares, permanecendo em ambiente privativo e ambiente da casa com ventilação natural.</li>
+            <li>Utilizar máscara de tecido e trocá-la quando estiver úmida.</li>
+            <li>Cobrir o nariz e a boca com lenço descartável ao tossir ou espirrar OU praticar etiqueta da tosse (tossir e espirrar na parte interna do braço).</li>
+            <li>Higienizar as mãos frequentemente com água e sabão ou gel alcoólico a 70%.</li>
+        </ol></p>
+        {% if paciente.num_pessoas == '0' %}
+            <br><br>
+            <p style="text-align: right">São Rafael, {% now "d" %} de {% now "F" %} de {% now "Y" %}</p><br><br><br>
+            <p style="text-align: center">_________________________________________________________ <br> <em>Assinatura do Profissional</em></p>
+        {% else %}
+            <p><strong>Nome das pessoas que residem no mesmo endereço que deverão cumprir medida de isolamento domiciliar:</strong></p>
+            <table id="tableResidente">
+                {% for residente in residentes %}
+                    <tr class="trResidente">
+                        <td class="tdResidente td1">{{ forloop.counter }}</td>
+                        <td class="tdResidente td2">{{ residente.nome_residente }}</td>
+                    <tr>
+                {% endfor %}
+            </table><br>
+            <p style="text-align: right">São Rafael, {% now "d" %} de {% now "F" %} de {% now "Y" %}</p><br>
+            <p style="text-align: center">_________________________________________________________ <br> <em>Assinatura do Profissional</em></p>
+        
+        {% endif %}
+    </div>
 </body>
 </html>
