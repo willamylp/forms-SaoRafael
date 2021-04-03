@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-from decouple import config
-from pathlib import Path
 import os
+from pathlib import Path
+from decouple import config
+from dj_database_url import parse as dburl
+from dj_static import Cling
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,26 +85,20 @@ WSGI_APPLICATION = 'Forms_SaoRafael.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-
-# if 'forms-saorafael.cw6wqpqsktku.sa-east-1.rds.amazonaws.com' in os.environ:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': os.environ['forms-saorafael'],
-#             'USER': os.environ['root'],
-#             'PASSWORD': os.environ['DOGLDHER32'],
-#             'HOST': os.environ['forms-saorafael.cw6wqpqsktku.sa-east-1.rds.amazonaws.com'],
-#             'PORT': os.environ['3306'],
-#         }
-#     }
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': config(
+        'DATABASE_URL', default=default_dburl, cast=dburl
+    ), 
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
