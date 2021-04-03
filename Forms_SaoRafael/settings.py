@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from decouple import config
 from dj_database_url import parse as dburl
-from dj_static import Cling
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['forms-saorafael.herokuapp.com/']
 
 # Application definition
 
@@ -141,20 +141,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     'estaticos',
-# ]
 STATIC_URL = '/static/'
-if DEBUG:
-   STATICFILES_DIRS = [
-       os.path.join(BASE_DIR, 'estaticos'),
-   ]
-else:
-   STATIC_ROOT = os.path.join(BASE_DIR, 'estaticos')
+STATICFILES_DIRS = [
+    'estaticos',
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'estaticos')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # LOGIN
 LOGIN_URL = '/login/'
