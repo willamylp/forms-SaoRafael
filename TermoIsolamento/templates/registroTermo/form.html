@@ -47,7 +47,6 @@
         
         <div id="divCNS" class="wrap-input100 col-md-4">
             {{ formPaciente.cns|add_class:'input100'|attr:"placeholder:Cartão do SUS"|attr:"name:id_cns" }}
-            {% comment %} <input id="cns" class="input100" type="text" name="cns" placeholder="Cartão do SUS"> {% endcomment %}
             <span class="focus-input100"></span>
             <label class="label-input100" for="id_cns">
                 <i id="iconInputCNS" class="material-icons">card_membership</i>
@@ -362,8 +361,8 @@
         <div class="container-contact100-form-btn col-md-5" style="margin-left: -12px;">
             <button type="submit" class="btn btn-block btn-lg bg-indigo waves-effect">
                 <i class="material-icons">save</i>&nbsp;&nbsp;
-                <span class="font-16">SALVAR &nbsp;& &nbsp;IMPRIMIR</span>&nbsp;&nbsp;
-                <i class="material-icons">print</i>
+                <span class="font-16">SALVAR</span>
+                {% comment %} <i class="material-icons">print</i> {% endcomment %}
             </button>
         </div>
     </div>

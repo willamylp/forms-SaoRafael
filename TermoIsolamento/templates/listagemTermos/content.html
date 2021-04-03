@@ -31,6 +31,7 @@
         <h4 style="margin-bottom: -5px; color: #444444;">Exportar Registros</h4>
         <thead>
             <tr>
+                <th>#</th>
                 <th>NOME DO PACIENTE</th>
                 <th>CNS / CPF</th>
                 <th>DT. NASCIM.</th>
@@ -55,7 +56,10 @@
             {% for paciente in pacientes %}
             <tr>
                 <td>
-                    <strong>{{ paciente.nome_paciente }}</strong>
+                    <strong>{{ paciente.id }}</strong>
+                </td>
+                <td>
+                    {{ paciente.nome_paciente }}
                 </td>
                 <td> 
                     {% if  paciente.semCPF == False %} 

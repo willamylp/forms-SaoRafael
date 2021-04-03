@@ -9868,7 +9868,7 @@
 		 * should contain an array for each column to be sorted initially containing
 		 * the column's index and a direction string ('asc' or 'desc').
 		 *  @type array
-		 *  @default [[0,'asc']]
+		 *  @default [[0,'desc']]
 		 *
 		 *  @dtopt Option
 		 *  @name DataTable.defaults.order
@@ -9888,7 +9888,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"aaSorting": [[0,'asc']],
+		"aaSorting": [[0,'desc']],
 	
 	
 		/**

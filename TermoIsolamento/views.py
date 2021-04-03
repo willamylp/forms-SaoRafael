@@ -4,6 +4,7 @@ from .forms import PacienteForm, ResidenteForm
 from .models import Paciente, Residente
 from Home.urls import home
 from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponseRedirect
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -52,9 +53,7 @@ def RegistroTermo(request):
                         ),
                         nome_residente=request.POST['id_nome_residente_{}'.format(i)]
                     ).save()
-        pct=Paciente.objects.filter(cpf=request.POST['cpf'])[:1].values()
-        return redirect('../ImprimirTermo/{}'.format(pct[0]['id']))
-        #return redirect('../ListarTermos')
+        return redirect('../ListarTermos')
     return render(
         request, 'registroTermo/content.html', {
             'formPaciente': formPaciente, 
