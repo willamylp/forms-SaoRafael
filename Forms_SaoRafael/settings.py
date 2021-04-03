@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 import os
 
@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '25hj9@i@ceg=t#eux=h&*w*zzv=47(w1a!d4=*my=as+mw8bf*'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -144,10 +144,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     'estaticos',
+# ]
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    'estaticos',
-]
+if DEBUG:
+   STATICFILES_DIRS = [
+       os.path.join(BASE_DIR, 'estaticos'),
+   ]
+else:
+   STATIC_ROOT = os.path.join(BASE_DIR, 'estaticos')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # LOGIN
 LOGIN_URL = '/login/'
