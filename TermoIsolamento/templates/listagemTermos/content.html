@@ -56,7 +56,8 @@
             {% for paciente in pacientes %}
             <tr>
                 <td>
-                    <strong>{{ paciente.id }}</strong>
+                    {% comment %} <strong>{{ paciente.id }}</strong> {% endcomment %}
+                    <strong>{{ forloop.counter }}</strong>
                 </td>
                 <td>
                     {{ paciente.nome_paciente }}
