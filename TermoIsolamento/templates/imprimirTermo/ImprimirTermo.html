@@ -48,8 +48,8 @@
         {% endif %}<br>
         <strong>&rarr; RESPONSÁVEL PELO PACIENTE:</strong> 
         {% if paciente.responsavel_pct == "Paciente" %} <em>O Próprio Paciente</em>
-        {% else %} <em>Outra Pessoa</em> <br><em>Assinatura do Responsável:</em> ____________________________________________ Grau de Parentesco: <u>{{ paciente.grau_parentesco }}</u>
-        {% endif %}<br>
+        {% else %} <em>Outra Pessoa</em> 
+        {% endif %}<br><em>Assinatura do Responsável:</em> ____________________________________________ Grau de Parentesco: <u>{{ paciente.grau_parentesco }}</u><br>
         <strong>&rarr; SINTOMAS:</strong>
         {% for sintoma in paciente.sintomas %}
             {% if sintoma != "Outros" %}
